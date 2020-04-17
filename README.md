@@ -1,7 +1,7 @@
 # PROYECTO-NASA-Master-Fullstack-Ficticia
 Segundo proyecto del Master-Fullstack en el que partire de las APIs de la NASA.
 
-La idea base sera una PWA que aporte datos interesantes sobre asteroides cercanos, imágenes de la Tierra, Marte y Luna, metereología, situación satelital... con permanencia de datos en firebase y sesion de usuario con autenticación para poder personalizar los datos que más nos interesen y recibir notificaciones.
+La idea base sera una PWA que aporte datos interesantes sobre asteroides cercanos, imágenes de la Tierra, Marte y Luna, metereología, situación satelital... presentación de los datos con gráficos, permanencia de datos en firebase y sesión de usuario con autenticación para poder personalizar los datos que más nos interesen y recibir notificaciones.
 
 - Vanilla JS
 
