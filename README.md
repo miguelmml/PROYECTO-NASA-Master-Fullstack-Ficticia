@@ -5,7 +5,7 @@ La idea base sera una PWA que aporte datos interesantes sobre asteroides cercano
 
 - Vanilla JS
 
-- [NASA APIs](https://api.nasa.gov/)
+- [NASA APIs](https://api.nasa.gov/){:target="_blank"}
 
 **Requisitos para este proyecto:**
 - Manipulación dinánima del DOM
