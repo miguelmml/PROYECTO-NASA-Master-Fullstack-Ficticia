@@ -79,16 +79,3 @@ const apiKey = myKey;
 
 
 
-
-/********SERVICE WORKER********/
-
-
-if('serviceWorker' in navigator){
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('./sw.js',{scope: './'})
-    .then(() => console.log('Service Worker registrado'))
-    .catch((err) => console.error('Error en registro de SW: ', err))
-  })
-}else {
-  console.warn('Service Worker no soportado por el navegador.')
-}

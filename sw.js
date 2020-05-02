@@ -1,11 +1,20 @@
 
-
-
+/********SERVICE WORKER********/
+if('serviceWorker' in navigator){
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('./sw.js', {scope: './'})
+    .then(() => console.log('Service Worker registrado'))
+    .catch((err) => console.error('Error en registro de SW: ', err))
+  })
+}else {
+  console.warn('Service Worker no soportado por el navegador.')
+}
 
 var CACHE_NAME = 'nasa-app-cache';
 var urlsToCache = [
   '/index.html',
   '/css/styles.css',
+  '/js/main.js'
 ];
 
 self.addEventListener('install', function(event) {
@@ -18,20 +27,18 @@ self.addEventListener('install', function(event) {
   );
 });
 
-self.addEventListener('fetch', function(event) {
-  CacheStorage.Keys()
-  event.respondWith(
-    caches.match(event.request)
-    // .then(console.log(event.request))
-      .then(function(response) {
-        // Cache hit - return response
-        if (response) {
-          console.log('encontrado: ',response)
-          return response;
-        }
-        console.log('no encontrado')
-        return fetch(event.request);
-      }
-    )
-  );
-});
+// self.addEventListener('fetch', function(event) {
+//   console.log('fetch a : ', event)
+//   event.respondWith(
+//     caches.match(event.request)
+//       .then(function(response) {
+//         if (response) {
+//           console.log('encontrado: ',response)
+//           return response;
+//         }
+//         console.log('no encontrado')
+//         return fetch(event.request);
+//       }
+//     )
+//   );
+// });
