@@ -1,20 +1,21 @@
-const vistas = [
+
+const templates = [
   {
-    id: "cuenta",
+    idTemp: "cuenta",
     template: `
-      <h1>${this.id}</h1>
+      <h1>Vista cuenta</h1>
     `
   },
   {
-    id: "datos",
+    idTemp: "datos",
     template: `
-      <h1>${this.id}</h1>
+      <h1>Vista datos</h1>
     `
   },
   {
-    id: "otro",
+    idTemp: "otro",
     template: `
-      <h1>${this.id}</h1>
+      <h1>Vista otro</h1>
     `
   },
 ]
@@ -26,6 +27,8 @@ window.addEventListener('load', () => {
     let id = e.target.id;
     console.log(id);
     window.history.pushState({id}, id, `/${id}`)
+
+    renderView(id);
   });
 
   document.getElementById('datos').addEventListener('click', e => {
@@ -33,6 +36,8 @@ window.addEventListener('load', () => {
     let id = e.target.id;
     console.log(id);
     window.history.pushState({id}, id, `/${id}`)
+
+    renderView(id);
   });
 
   document.getElementById('otro').addEventListener('click', e => {
@@ -40,6 +45,8 @@ window.addEventListener('load', () => {
     let id = e.target.id;
     console.log(id);
     window.history.pushState({id}, id, `/${id}`)
+
+    renderView(id);
   });
 })
 
@@ -47,9 +54,30 @@ window.addEventListener('load', () => {
 window.onpopstate = function(e){
   console.log(e);
   console.log("location: " + document.location + ", state: " + JSON.stringify(e.state));
+  let id = e.state.id;
+  renderView(id);
 }
 
 
-function renderView(id){
+window.addEventListener('beforeunload', (e) => {
+  console.log("reload", e.cancelable)
+  e.preventDefault();
+  e.stopPropagation();
+  console.log('evento reload detenido')
+})
 
+
+
+function renderView(id){
+   let template;
+
+  templates.filter(function(obj){
+    if( obj.idTemp === id){
+      return template = obj.template
+    }
+  })
+
+  console.log(template);
+
+  document.getElementById('content').innerHTML = template;
 }
