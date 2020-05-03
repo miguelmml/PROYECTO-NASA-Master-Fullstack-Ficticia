@@ -1,83 +1,58 @@
-
-const templates = [
-  {
-    idTemp: "cuenta",
-    template: `
-      <h1>Vista cuenta</h1>
-    `
-  },
-  {
-    idTemp: "datos",
-    template: `
-      <h1>Vista datos</h1>
-    `
-  },
-  {
-    idTemp: "otro",
-    template: `
-      <h1>Vista otro</h1>
-    `
-  },
-]
+import templates from '/templates.js';
 
 window.addEventListener('load', () => {
-
   document.getElementById('cuenta').addEventListener('click', e => {
-    console.log('click en cuenta ')
     let id = e.target.id;
-    console.log(id);
-    window.history.pushState({id}, id, `/${id}`)
-
+    window.history.pushState({id}, id, `./${id}`)
     renderView(id);
   });
-
   document.getElementById('datos').addEventListener('click', e => {
-    console.log('click en datos ')
     let id = e.target.id;
-    console.log(id);
-    window.history.pushState({id}, id, `/${id}`)
-
+    window.history.pushState({id}, id, `./${id}`)
     renderView(id);
-  });
-
-  document.getElementById('otro').addEventListener('click', e => {
-    console.log('click en otro ')
-    let id = e.target.id;
-    console.log(id);
-    window.history.pushState({id}, id, `/${id}`)
-
-    renderView(id);
+    dataButtonsListeners();
   });
 })
 
-
-window.onpopstate = function(e){
-  console.log(e);
-  console.log("location: " + document.location + ", state: " + JSON.stringify(e.state));
-  let id = e.state.id;
-  renderView(id);
+function dataButtonsListeners() {
+  document.getElementById('imagenDelDia').addEventListener('click', function(e){
+    let id = e.target.id;
+    window.history.pushState({id}, id, `./datos/${id}`)
+    renderView(id);
+  });
+  document.getElementById('objetosCercanos').addEventListener('click', function(e){
+    let id = e.target.id;
+    window.history.pushState({id}, id, `./datos/${id}`)
+    renderView(id);
+});
+  document.getElementById('eventosNaturales').addEventListener('click', function(e){
+    let id = e.target.id;
+    window.history.pushState({id}, id, `./datos/${id}`)
+    renderView(id);
+  });
 }
 
-
-window.addEventListener('beforeunload', (e) => {
-  console.log("reload", e.cancelable)
-  e.preventDefault();
-  e.stopPropagation();
-  console.log('evento reload detenido')
-})
-
-
+window.onpopstate = function(e){
+  if(e.state){
+    let id = e.state.id;
+    if(id == 'datos'){
+      (async function (){
+        await renderView(id);
+        dataButtonsListeners();
+      })();
+    }
+    renderView(id);
+  }else{
+    renderView('/');
+  }
+}
 
 function renderView(id){
-   let template;
-
+  let template;
   templates.filter(function(obj){
     if( obj.idTemp === id){
       return template = obj.template
     }
   })
-
-  console.log(template);
-
   document.getElementById('content').innerHTML = template;
 }
