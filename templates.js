@@ -16,7 +16,7 @@
       <div class="dataButtons">
         <button id="imagenDelDia">Imagen del dia</button>
         <button id="objetosCercanos">Objetos cercanos</button>
-        <button id="eventosNaturales">Eventos naturales</button>
+        <button id="transferenciaTecnologica">Transferencia Tecnologica</button>
       </div>
     `
   },
@@ -31,24 +31,41 @@
     template: `
       <h1>Objetos Cercanos</h1>
       <select  id="nearObjectSelect"></select>
-      <div id="nearObjectChart">
+      <div class="wrapperChart" id="nearObjectChart">
         <canvas id="myChart"></canvas>
       </div>
       <div class="wrapperTable">
         <table id="nearObjectTable">
           <tr>
-            <th>ID</th><th>Distance</th><th>Speed (KM/s)</th><th>Diameter(KM)</th><th>Potentially hazardous</th><th>Link</th>
+            <th>ID</th><th>Distance(Km)</th><th>Speed(Km/s)</th><th>Diameter(Km)</th><th>Potentially hazardous</th><th>Link</th>
           </tr>
         </table>
       </div>
     `
   },
   {
-    idTemp: "eventosNaturales",
+    idTemp: "transferenciaTecnologica",
     template: `
-      <h1>eventos naturales</h1>
+      <h1>Transferencia Tecnologica</h1>
+      <div class="wrapperTable">
+      <table id="techTrasferTable">
+        <tr>
+          <th>ID</th><th>Description</th><th>Type</th><th>Image</th><th>Link</th>
+        </tr>
+      </table>
+    </div>
     `
   },
+  {
+    idTemp: "obtenerImagen",
+    template: `
+    <div class="imagenDelDia__wrapper">
+      <input id="selectorFecha" type="date">
+      <button id="btnBuscar">Buscar</button>
+      <figure id="imagenDelDia"></figure>
+    </div>
+  `
+  }
 ]
 
 export default templates;

@@ -1,7 +1,5 @@
 import templates from '/templates.js';
-import {obtenerImagen, objetosCercanos, eventosNaturales, apiKey, arrObjetosCercanos} from '/js/main.js'
-
-
+import {obtenerImagen, objetosCercanos, transferenciaTecnologica, apiKey} from '/js/fetch.js';
 
 window.addEventListener('load', () => {
   document.getElementById('cuenta').addEventListener('click', e => {
@@ -28,19 +26,13 @@ function dataButtonsListeners() {
     let id = e.target.id;
     window.history.pushState({id}, id, `./datos/${id}`)
     renderView(id);
-
-    
     objetosCercanos(`https://api.nasa.gov/neo/rest/v1/feed?&api_key=${apiKey}`);
-    
-    
-    
-
 });
-  document.getElementById('eventosNaturales').addEventListener('click', function(e){
+  document.getElementById('transferenciaTecnologica').addEventListener('click', function(e){
     let id = e.target.id;
     window.history.pushState({id}, id, `./datos/${id}`)
     renderView(id);
-    eventosNaturales('https://eonet.sci.gsfc.nasa.gov/api/v2.1/events?days=10');
+    transferenciaTecnologica(`https://api.nasa.gov/techtransfer/patent/?engine&api_key=${apiKey}`);
   });
 }
 
@@ -52,8 +44,24 @@ window.onpopstate = function(e){
         await renderView(id);
         dataButtonsListeners();
       })();
+    } else if(id == 'imagenDelDia'){
+      (async function (){
+        await renderView(id);
+        obtenerImagen(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`);
+      })();
+    } else if(id == 'objetosCercanos'){
+      (async function (){
+        await renderView(id);
+        objetosCercanos(`https://api.nasa.gov/neo/rest/v1/feed?&api_key=${apiKey}`);
+      })();
+    } else if(id == 'transferenciaTecnologica'){
+      (async function (){
+        await renderView(id);
+        transferenciaTecnologica(`https://api.nasa.gov/techtransfer/patent/?engine&api_key=${apiKey}`);
+      })();
+    } else {
+      renderView(id);
     }
-    renderView(id);
   }else{
     renderView('/');
   }
@@ -68,3 +76,5 @@ function renderView(id){
   })
   document.getElementById('content').innerHTML = template;
 }
+
+

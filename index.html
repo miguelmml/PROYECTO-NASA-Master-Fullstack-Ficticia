@@ -4,6 +4,7 @@
 <meta charset="utf-8"> 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Proyecto NASA</title>
+<link rel="manifest" href="manifest.json">
 <link href="css/styles.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 </head>
@@ -11,33 +12,30 @@
 <body>
 
   <header class="mainHeader">
-
-    <h1 class="titulo">Bienvenido</h1>
+    <div class="titulo__wrapper">
+      <h1 class="titulo">BIENVENIDO</h1>
+    </div>
 
     <nav class="mainNav">
-      Menú
+      <p class="mainNav__title">MENU</p> 
       <ul>
-        <li><button id="cuenta">Cuenta</button></li>
-        <li><button id="datos">Datos</button></li>
+        <li id="cuenta">Cuenta</li>
+        <li id="datos">Datos</li>
       </ul>
     </nav>
   </header>
-
-  <main class="content" id="content"></main>
-
   
-
-  
-    
+  <div class="content__wrapper">
+    <main class="content" id="content"></main>
+  </div> 
 
   <footer class="mainFooter"></footer>
 
+  <script src="sw.js"></script>
   <script type="module" src="templates.js"></script>
   <script type="module" src="js/key.js"></script>  
-  <script type="module" src="js/main.js"></script>   
-  <!-- <script src="sw.js"></script> -->
+  <script type="module" src="js/fetch.js"></script>   
   <script type="module" src="router.js"></script>
-  <script type="module" src="chart.js"></script>
 
 </body>
 </html>
