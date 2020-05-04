@@ -70,3 +70,9 @@ li:hover{
   padding: 7rem 2rem;
   box-sizing: border-box;
 }
+
+table, th, td{
+  border:1px solid black;
+  border-collapse: collapse;
+  padding: 5px;
+}

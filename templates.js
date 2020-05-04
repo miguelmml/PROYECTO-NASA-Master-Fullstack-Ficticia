@@ -29,7 +29,18 @@
   {
     idTemp: "objetosCercanos",
     template: `
-      <h1>objetos cercanos</h1>
+      <h1>Objetos Cercanos</h1>
+      <select  id="nearObjectSelect"></select>
+      <div id="nearObjectChart">
+        <canvas id="myChart"></canvas>
+      </div>
+      <div class="wrapperTable">
+        <table id="nearObjectTable">
+          <tr>
+            <th>ID</th><th>Distance</th><th>Speed (KM/s)</th><th>Diameter(KM)</th><th>Potentially hazardous</th><th>Link</th>
+          </tr>
+        </table>
+      </div>
     `
   },
   {
