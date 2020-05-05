@@ -7,6 +7,25 @@
     idTemp: "cuenta",
     template: `
       <h1>Vista cuenta</h1>
+      <div class="logIn__wrapper">
+        <h1>Autenticación con Firebase</h1>      
+        <input id="textBox" type="text" placeholder="Email">
+        <input id="passBox" type="password" placeholder="Password">
+        <button id="btnSignUp">Sign Up</button>
+        <button id="btnLogIn">Log In</button>
+        <button id="btnLogOut">Log Out</button>
+        <button id="btnRemove">Delete</button>
+        <button id="btnGitHub">GitHub</button>
+      </div>
+      <div class="session__wrapper">
+        <div class="actionInfo__wrapper">
+          <p id="actionInfo"></p>
+        </div>
+        <div class="userList__wrapper">
+          <h2>Lista de Usuarios</h2>
+          <div id="userList"></div>
+        </div>
+      </div>
     `
   },
   {
@@ -65,7 +84,5 @@
       <figure id="imagenDelDia"></figure>
     </div>
   `
-  }
-]
-
-export default templates;
+  },
+];

@@ -1,6 +1,5 @@
-//Fetch de los datos
-import myKey from '/js/key.js';
-import templates from '/templates.js';
+// //Fetch de los datos 
+import myKey from './key.js';
 
 const apiKey = myKey;
 
@@ -15,18 +14,18 @@ function obtenerImagen(url) {
       let autor = data.copyright ? data.copyright : "";
       document.querySelector('#imagenDelDia').innerHTML = `<img class="imagenNasa" src="${data.url}" alt="imagen Nasa" ><figcaption>${autor} - ${data.title}</figcaption>`;
     } else {
-      document.querySelector('#imagenDelDia').innerHTML = `<p>Imagen no disponible, pruebe con otro dia.</p>`
+      document.querySelector('#imagenDelDia').innerHTML = `<p>Imagen no disponible, pruebe con otro dia.</p>`;
     }
     addImageListener();
   })
-  .catch(err => console.error('Error en fetch obtenerImagen', err))
+  .catch(err => console.error('Error en fetch obtenerImagen', err));
 }
 
 // para sacar la imagen de una fecha en concreto
 function addImageListener() {
   document.getElementById('btnBuscar').addEventListener('click', function(){
     let fecha = document.getElementById('selectorFecha').value;
-    obtenerImagen(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${fecha}`)
+    obtenerImagen(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${fecha}`);
   });
 }
 
@@ -39,13 +38,13 @@ function objetosCercanos(url) {
   .then(data => {
     arrObjetosCercanos = data.near_earth_objects;
     for( let i in arrObjetosCercanos){
-      let option = `<option value="${i}">${i}</option>`
+      let option = `<option value="${i}">${i}</option>`;
       document.querySelector('#nearObjectSelect').innerHTML += option;
     }
     renderChart();
     listenersToSelect();
   })
-  .catch(err => console.error('Error en fetch objetosCercanos', err))
+  .catch(err => console.error('Error en fetch objetosCercanos', err));
 } 
 
 function listenersToSelect() {
@@ -57,7 +56,7 @@ function listenersToSelect() {
       </tr>
     `;
     renderChart();
-  })
+  });
 }
 
 function renderChart() {
@@ -79,7 +78,7 @@ function renderChart() {
   },
   options: {scales: { yAxes: [ {ticks: {beginAtZero: true}}]}
   }
-}
+};
   var myChart = new Chart(ctx, dataChart);
   currentValues.forEach(element => {
     document.getElementById("nearObjectTable").innerHTML += `
@@ -103,17 +102,8 @@ function transferenciaTecnologica(url,obj) {
       <tr>
         <td>${element[4]}</td><td>${element[3]}</td><td>${element[5]}</td><td><a href="${element[10]}" target="_blank">IMG</a></td><td><a href="https://technology.nasa.gov/patent/${element[4]}" target="_blank">Read more...</a></td>
       </tr>
-      `
-    })
+      `;
+    });
   })
-  .catch(err => console.error('Error en fetch tech transfer', err))
+  .catch(err => console.error('Error en fetch tech transfer', err));
 } 
-
-
-
-
-
-
-
-
-export {obtenerImagen, objetosCercanos, transferenciaTecnologica, apiKey, arrObjetosCercanos};
