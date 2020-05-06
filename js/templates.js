@@ -27,7 +27,8 @@
         </div>
       </div>
       <div class="dbContent__wrapper">
-        <button id="myData">My data</button>
+        <button id="btnMyData">My data</button>
+        <ul id="myData"></ul>
       </div>
     `
   },

@@ -9,7 +9,8 @@ html{
 
 body{
   background-color: rgb(29, 22, 22);
-  color: rgb(114, 243, 114)
+  color: rgb(46, 102, 46);
+  transition: color 0s 1.5s;
 }
 
 .imagenDelDia__wrapper{
@@ -33,7 +34,7 @@ body{
 .mainHeader::after{
   display: block;
   content: "";
-  width: 16%;
+  width: 25%;
   height: 0;
   border-top: 2.8rem solid rgb(9, 41, 65);
   border-right: 40px solid transparent;
@@ -59,7 +60,7 @@ body{
 .mainFooter::after{
   display: block;
   content: "";
-  width: 16%;
+  width: 25%;
   height: 0;
   border-top: 2.8rem solid rgb(29, 22, 22);
   border-right: 40px solid transparent;
@@ -144,15 +145,16 @@ li:hover{
   box-shadow: inset 0 2rem 80px rgb(21, 78, 59);
 }
 .content{
-  width: 70%;
-  height: 490px;
+  width: 0;
+  height: 0;
   margin: 0 auto;
   position: relative;
   top: 4.5rem;
-border: 1px solid crimson;
+border: 1px solid #06C2CD;
   box-sizing: border-box;
-  padding-top: 1%;
+  padding: 1%;
   overflow-y: auto;
+  transition: all 1s 2s;
 }
 
 .content::-webkit-scrollbar {
@@ -183,6 +185,68 @@ table, th, td{
 .wrapperChart{
   width: 60%;
 }
+
+.hud__right{
+  border: 1px solid crimson;
+  width: 10%;
+  height: 20rem;
+  position: absolute;
+  top: 10rem;
+  right: 0;
+  box-sizing: border-box;
+  padding: 2%;
+  text-align: end;
+  line-height: 2;
+}
+
+.hud__left{
+/* border: 1px solid crimson; */
+  width: 10%;
+  height: 10rem;
+  position: absolute;
+  top: 4.5rem;
+  left: 0;
+  box-sizing: border-box;
+  padding: 2%;
+  text-align: end;
+  line-height: 2;
+}
+.hud__left * {
+  position: relative;
+
+}
+
+.system::after{
+  content: "";
+  display: block;
+  width: .6rem;
+  height: .6rem;
+  border-radius: 100%;
+  background-color: crimson;
+  position: absolute;
+  right: -1.2rem;
+  top: .7rem;
+  transition: all 0s 1s;
+
+}
+
+.fuel::after, .energy::after ,.shield::after{
+  content: "";
+  display: block;
+  width: 0;
+  height: .4rem;
+  background-color: #06C2CD;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  transition: all 2s 2.5s ;
+
+}
+
+
+
+
+
 
 
 

@@ -1,3 +1,14 @@
+//reglas css para las animaciones del inicio
+window.addEventListener('load', function() {
+
+  document.styleSheets[0].addRule("p.system::after","background-color: rgb(145, 255, 0)");
+  document.styleSheets[0].addRule("p.fuel::after","width: 3.5rem");
+  document.styleSheets[0].addRule("p.energy::after","width: 5rem");
+  document.styleSheets[0].addRule("p.shield::after","width: 1.5rem; background-color: crimson");
+  document.styleSheets[0].addRule(".content"," width: 80%; height: 30rem;");
+  document.styleSheets[0].addRule("body","color: rgb(114, 243, 114) ");
+
+});
 // //Fetch de los datos 
 import myKey from './key.js';
 
@@ -114,7 +125,7 @@ function transferenciaTecnologica(url,obj) {
 } 
 
 var firebaseConfig = {
-  apiKey: "AIzaSyAocTj9tvWhjdUy6EPCjAcWdLeHxCG8T2Q",
+  // falta api key
   authDomain: "proyecto-nasa-93d77.firebaseapp.com",
   databaseURL: "https://proyecto-nasa-93d77.firebaseio.com",
   projectId: "proyecto-nasa-93d77",
@@ -163,6 +174,7 @@ function logOut(){
     firebase.auth().signOut()
     .then(function(){
     document.getElementById('actionInfo').innerHTML = `User ${user}, disconnected`;
+    document.getElementById('myData').innerHTML = "";
     })
     .catch(function(error) {
     document.getElementById('actionInfo').innerHTML = `ERROR: ${error.code}  ${error.message}`;
@@ -217,32 +229,38 @@ function accountListeners(){
 
   document.getElementById("btnRemove").addEventListener("click", borrarUser);
 
-  document.getElementById("myData").addEventListener('click', function() {
-    console.log('DATA');
-
+  document.getElementById("btnMyData").addEventListener('click', function() {
     if(firebase.auth().currentUser) {
-      // let data = firebase.auth().currentUser.providerData[0].email;
-      // let num = data.indexOf("@");
-      // let user = data.slice(0,num);
-      // let userFirebaseRef = firebase.database().ref(`Users/${user}`);
-      // userFirebaseRef.set({ title: imgTitle, url: imgSrc})
-      
-      ref.on("child_added", snapshot => {
-        // const usersData = snapshot.val();
-        snapshot.forEach((childSnapshot) => {
-          console.log(childSnapshot);
-          
-
-        });
+      let data = firebase.auth().currentUser.providerData[0].email;
+      let num = data.indexOf("@");
+      let user = data.slice(0,num);
+      let userFirebaseRef = firebase.database().ref(`Users/${user}`);
+      var content = document.getElementById('myData');
+      userFirebaseRef.on("value", snapshot => {
+        if(snapshot.val().Images) {
+          content.innerHTML = `<h3>Images</h3>`;
+          for(let i in snapshot.val().Images){
+            content.innerHTML += `<li><a href="${snapshot.val().Images[i].url}" target="_blank">${snapshot.val().Images[i].title}</a></li>`;
+          }
+        }
+        if(snapshot.val().Near_Objects) {
+          content.innerHTML += `<h3>Near Objects</h3>`;
+          for(let i in snapshot.val().Near_Objects){
+            content.innerHTML += `<li><a href="${snapshot.val().Near_Objects[i].url}" target="_blank">${snapshot.val().Near_Objects[i].title}</a></li>`;
+          }
+        }
+        if(snapshot.val().Tech_Transfer) {
+          content.innerHTML += `<h3>Tech Transfer</h3>`;
+          for(let i in snapshot.val().Tech_Transfer){
+            content.innerHTML += `<li><a href="${snapshot.val().Tech_Transfer[i].url}" target="_blank">${snapshot.val().Tech_Transfer[i].title}</a></li>`;
+          }
+        }
       });
-
     } else {
       throw new Error('No estas conectado');
     }
   });
 }
-
-
 
 
 firebase.auth().onAuthStateChanged(function(user) {
@@ -295,7 +313,7 @@ function listenerNearObjectsTable() {
       let data = firebase.auth().currentUser.providerData[0].email;
       let num = data.indexOf("@");
       let user = data.slice(0,num);
-      let userFirebaseRef = firebase.database().ref(`Users/${user}/Near-Objects/${nearObjectTitle}`);
+      let userFirebaseRef = firebase.database().ref(`Users/${user}/Near_Objects/${nearObjectTitle}`);
       userFirebaseRef.set({title: nearObjectTitle, url: nearObjectLink});
     } else {
       throw new Error('No estas conectado');
@@ -313,7 +331,7 @@ function listenerTechTransferTable() {
       let data = firebase.auth().currentUser.providerData[0].email;
       let num = data.indexOf("@");
       let user = data.slice(0,num);
-      let userFirebaseRef = firebase.database().ref(`Users/${user}/Tech-Transfer/${techTitle}`);
+      let userFirebaseRef = firebase.database().ref(`Users/${user}/Tech_Transfer/${techTitle}`);
       userFirebaseRef.set({title: techTitle, url: techLink});
     } else {
       throw new Error('No estas conectado');
@@ -479,7 +497,8 @@ function renderView(id){
         </div>
       </div>
       <div class="dbContent__wrapper">
-        <button id="myData">My data</button>
+        <button id="btnMyData">My data</button>
+        <ul id="myData"></ul>
       </div>
     `
   },
