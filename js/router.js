@@ -5,6 +5,8 @@ window.addEventListener('load', () => {
     let id = e.target.id;
     window.history.pushState({id}, id, `/${id}`);
     renderView(id);
+    accountListeners();
+    firebaseUserList();
   });
   document.getElementById('datos').addEventListener('click', e => {
     let id = e.target.id;
@@ -57,6 +59,12 @@ window.onpopstate = function(e){
       (async function (){
         await renderView(id);
         transferenciaTecnologica(`https://api.nasa.gov/techtransfer/patent/?engine&api_key=${apiKey}`);
+      })();
+    }else if(id == 'cuenta'){
+      (async function (){
+        await renderView(id);
+        accountListeners();
+        firebaseUserList();
       })();
     } else {
       renderView(id);

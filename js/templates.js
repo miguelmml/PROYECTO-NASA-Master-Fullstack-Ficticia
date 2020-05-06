@@ -26,6 +26,9 @@
           <div id="userList"></div>
         </div>
       </div>
+      <div class="dbContent__wrapper">
+        <button id="myData">My data</button>
+      </div>
     `
   },
   {
@@ -42,7 +45,13 @@
   {
     idTemp: "imagenDelDia",
     template: `
-      <h1>imagen del dia</h1>
+      <h1>Imagen del dia</h1>
+      <div class="imagenDelDia__wrapper">
+        <input id="selectorFecha" type="date">
+        <button id="btnBuscar">Search</button>
+        <button id="saveImg">Save in Firebase</button>
+        <figure id="imagenDelDia"></figure>
+      </div>
     `
   },
   {
@@ -56,7 +65,7 @@
       <div class="wrapperTable">
         <table id="nearObjectTable">
           <tr>
-            <th>ID</th><th>Distance(Km)</th><th>Speed(Km/s)</th><th>Diameter(Km)</th><th>Potentially hazardous</th><th>Link</th>
+            <th>ID</th><th>Distance(Km)</th><th>Speed(Km/s)</th><th>Diameter(Km)</th><th>Potentially hazardous</th><th>Link</th><th>Firebase</th>
           </tr>
         </table>
       </div>
@@ -67,22 +76,12 @@
     template: `
       <h1>Transferencia Tecnologica</h1>
       <div class="wrapperTable">
-      <table id="techTrasferTable">
+      <table id="techTransferTable">
         <tr>
-          <th>ID</th><th>Description</th><th>Type</th><th>Image</th><th>Link</th>
+          <th>ID</th><th>Description</th><th>Type</th><th>Image</th><th>Link</th><th>Firebase</th>
         </tr>
       </table>
     </div>
     `
-  },
-  {
-    idTemp: "obtenerImagen",
-    template: `
-    <div class="imagenDelDia__wrapper">
-      <input id="selectorFecha" type="date">
-      <button id="btnBuscar">Buscar</button>
-      <figure id="imagenDelDia"></figure>
-    </div>
-  `
-  },
+  }
 ];
