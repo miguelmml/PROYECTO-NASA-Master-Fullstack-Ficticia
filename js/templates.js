@@ -48,9 +48,11 @@
     template: `
       <h2>Picture of the day view</h2>
       <div class="imagenDelDia__wrapper">
-        <input id="selectorFecha" type="date">
-        <button class="btnStandar" id="btnBuscar">Search</button>
-        <button class="btnStandar" id="saveImg">Save in Firebase</button>
+        <div class="imgDayButtons">
+          <input class="dateSelect" id="dateSelect" type="date">
+          <button class="btnStandar" id="btnBuscar">Search</button>
+          <button class="btnStandar" id="saveImg">Save in Firebase</button>
+        </div>
         <figure id="imagenDelDia"></figure>
       </div>
     `

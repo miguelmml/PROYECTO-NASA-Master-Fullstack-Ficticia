@@ -14,7 +14,7 @@ function obtenerImagen(url) {
       let autor = data.copyright ? data.copyright : "";
       document.querySelector('#imagenDelDia').innerHTML = `<img class="imagenNasa" id="imagenNasa" src="${data.url}" data-title="${data.title}" alt="imagen Nasa" ><figcaption>${autor} - ${data.title}</figcaption>`;
     } else {
-      document.querySelector('#imagenDelDia').innerHTML = `<p>Imagen no disponible, pruebe con otro dia.</p>`;
+      document.querySelector('#imagenDelDia').innerHTML = `<p>Image not available or wrong date, try another date.</p>`;
     }
     addImageListeners();
   })
@@ -24,7 +24,7 @@ function obtenerImagen(url) {
 // para sacar la imagen de una fecha en concreto
 function addImageListeners() {
   document.getElementById('btnBuscar').addEventListener('click', function(){
-    let fecha = document.getElementById('selectorFecha').value;
+    let fecha = document.getElementById('dateSelect').value;
     obtenerImagen(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${fecha}`);
   });
   document.getElementById('saveImg').addEventListener('click', saveImg);

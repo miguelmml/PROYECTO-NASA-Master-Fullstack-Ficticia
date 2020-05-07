@@ -30,15 +30,18 @@ h3{
   margin: 1rem;
 }
 
-.logInWrapper input, .nearObjectsSelect{
+.logInWrapper input, .nearObjectsSelect, .dateSelect{
   
-  color: white;
+  color: #fff;
   border: 1px solid rgb(105, 104, 104);
   border-radius: 2px;
   background-color: rgb(83, 76, 76);
   padding: .2rem;
   margin: 0 .5rem;
 
+}
+picture{
+  margin: 0 auto;
 }
 
 .actionInfo__wrapper{
@@ -63,9 +66,6 @@ h3{
   text-align: center;
 }
 
-.sessionWrapper__userData button{
-
-}
 .sessionWrapper__userData ul{
   margin-top: .2rem;
   border: 1px solid rgb(114, 243, 114);
@@ -103,7 +103,19 @@ h3{
 
 
 .imagenDelDia__wrapper{
-  width: 40%;
+  display: flex;
+  justify-content: space-around;
+}
+.imgDayButtons{
+  display: flex;
+  flex-direction: column;
+  padding-top: 4rem;
+}
+.imgDayButtons * {
+  margin: .5rem 0;
+}
+.imagenNasa{
+  max-width: 35rem;
 }
 
 .mainHeader{
@@ -288,12 +300,12 @@ border: 1px solid #06C2CD;
 }
 
 
-.imagenNasa{
-  max-width: 60rem;
-}
+
 
 table, th, td{
-  border:1px solid black;
+  border: 1px solid rgb(139, 139, 139);
+  border-radius: 2px;
+  background-color: rgb(46, 43, 43);
   border-collapse: collapse;
   padding: 5px;
   margin: 0 auto;
@@ -301,6 +313,10 @@ table, th, td{
 
 .wrapperChart{
   width: 60%;
+}
+canvas{
+  margin-left: 50%;
+  transform: translateX(-25%);
 }
 
 .hud__right{

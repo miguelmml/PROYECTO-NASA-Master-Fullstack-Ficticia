@@ -25,7 +25,7 @@ function obtenerImagen(url) {
       let autor = data.copyright ? data.copyright : "";
       document.querySelector('#imagenDelDia').innerHTML = `<img class="imagenNasa" id="imagenNasa" src="${data.url}" data-title="${data.title}" alt="imagen Nasa" ><figcaption>${autor} - ${data.title}</figcaption>`;
     } else {
-      document.querySelector('#imagenDelDia').innerHTML = `<p>Imagen no disponible, pruebe con otro dia.</p>`;
+      document.querySelector('#imagenDelDia').innerHTML = `<p>Image not available or wrong date, try another date.</p>`;
     }
     addImageListeners();
   })
@@ -35,7 +35,7 @@ function obtenerImagen(url) {
 // para sacar la imagen de una fecha en concreto
 function addImageListeners() {
   document.getElementById('btnBuscar').addEventListener('click', function(){
-    let fecha = document.getElementById('selectorFecha').value;
+    let fecha = document.getElementById('dateSelect').value;
     obtenerImagen(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${fecha}`);
   });
   document.getElementById('saveImg').addEventListener('click', saveImg);
@@ -531,9 +531,11 @@ function renderView(id){
     template: `
       <h2>Picture of the day view</h2>
       <div class="imagenDelDia__wrapper">
-        <input id="selectorFecha" type="date">
-        <button class="btnStandar" id="btnBuscar">Search</button>
-        <button class="btnStandar" id="saveImg">Save in Firebase</button>
+        <div class="imgDayButtons">
+          <input class="dateSelect" id="dateSelect" type="date">
+          <button class="btnStandar" id="btnBuscar">Search</button>
+          <button class="btnStandar" id="saveImg">Save in Firebase</button>
+        </div>
         <figure id="imagenDelDia"></figure>
       </div>
     `
