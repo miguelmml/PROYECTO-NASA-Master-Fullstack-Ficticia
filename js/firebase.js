@@ -1,6 +1,7 @@
 
 var firebaseConfig = {
   // falta api key
+  apiKey: "AIzaSyAocTj9tvWhjdUy6EPCjAcWdLeHxCG8T2Q",
   authDomain: "proyecto-nasa-93d77.firebaseapp.com",
   databaseURL: "https://proyecto-nasa-93d77.firebaseio.com",
   projectId: "proyecto-nasa-93d77",
@@ -86,7 +87,7 @@ function accountListeners(){
      if(/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/.test(pass)){
         signUp(name,pass);
      } else {
-      document.getElementById('actionInfo').innerHTML = `Invalid pass, the password must contain: <br>- a capital letter <br>- a small letter-<br> a number<br>- 8-16 characters<br>- NO other symbols<br>`;
+      document.getElementById('actionInfo').innerHTML = `Invalid pass, the password must contain: <br>- a capital letter <br>- a small letter<br>- a number<br>- 8-16 characters<br>- NO other symbols<br>`;
      }
     } else {
       document.getElementById('actionInfo').innerHTML = `Invalid user name, use an e-mail account => example: name@demo.com`;
@@ -141,10 +142,11 @@ function accountListeners(){
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     console.log("Bienvenido! " + user.email);
-    document.getElementById("titulo").innerText = `${user.email}`;
+    let userName = user.email.split(/@/);
+    document.getElementById("titulo").innerText = `${userName[0]}`;
   } else {
     console.log("No hay nadie en el sistema");
-    document.getElementById("titulo").innerText = `No conectado`;
+    document.getElementById("titulo").innerText = `disconnected`;
   }
 });
 
@@ -157,7 +159,7 @@ function firebaseUserList() {
       document.getElementById("userList").innerHTML = "";
       snapshot.forEach((childSnapshot) => {
           let element = childSnapshot.val();
-          document.getElementById("userList").innerHTML += `${element.email}<br>`;
+          document.getElementById("userList").innerHTML += `<p>${element.email}<p>`;
       });
     }
   });

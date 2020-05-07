@@ -2,6 +2,7 @@
 
 window.addEventListener('load', () => {
   document.getElementById('cuenta').addEventListener('click', e => {
+    e.preventDefault();
     let id = e.target.id;
     window.history.pushState({id}, id, `/${id}`);
     renderView(id);
@@ -9,6 +10,7 @@ window.addEventListener('load', () => {
     firebaseUserList();
   });
   document.getElementById('datos').addEventListener('click', e => {
+    e.preventDefault();
     let id = e.target.id;
     window.history.pushState({id}, id, `/${id}`);
     renderView(id);
@@ -18,18 +20,21 @@ window.addEventListener('load', () => {
 
 function dataButtonsListeners() {
   document.getElementById('imagenDelDia').addEventListener('click', function(e){
+    e.preventDefault();
     let id = e.target.id;
     window.history.pushState({id}, id, `./datos/${id}`);
     renderView(id);
     obtenerImagen(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`);
   });
   document.getElementById('objetosCercanos').addEventListener('click', function(e){
+    e.preventDefault();
     let id = e.target.id;
     window.history.pushState({id}, id, `./datos/${id}`);
     renderView(id);
     objetosCercanos(`https://api.nasa.gov/neo/rest/v1/feed?&api_key=${apiKey}`);
 });
   document.getElementById('transferenciaTecnologica').addEventListener('click', function(e){
+    e.preventDefault();
     let id = e.target.id;
     window.history.pushState({id}, id, `./datos/${id}`);
     renderView(id);

@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'SpaceAge';
+  src: url('/css/fonts/SpaceAge.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 /* Reset de reglas de formato por defecto */
 a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}nav ul{list-style-type:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}table{border-collapse:collapse;border-spacing:0}/* Añadidos =>*/img{display:block}video{display:block}a{text-decoration:none}div{box-sizing:border-box}
 
@@ -11,7 +19,88 @@ body{
   background-color: rgb(29, 22, 22);
   color: rgb(46, 102, 46);
   transition: color 0s 1.5s;
+  
 }
+
+h2{
+  margin-bottom: 2rem;
+}
+
+h3{
+  margin: 1rem;
+}
+
+.logInWrapper input, .nearObjectsSelect{
+  
+  color: white;
+  border: 1px solid rgb(105, 104, 104);
+  border-radius: 2px;
+  background-color: rgb(83, 76, 76);
+  padding: .2rem;
+  margin: 0 .5rem;
+
+}
+
+.actionInfo__wrapper{
+  width: fit-content;
+  margin: 1rem auto;
+  border: 1px solid rgb(114, 243, 114);
+  border-radius: 4px;
+ padding: .2rem .8rem;
+}
+
+.sessionWrapper{
+  display: flex;
+  justify-content: space-around;
+}
+.sessionWrapper__userList{
+  width: 30%;
+}
+.sessionWrapper__userData{
+  margin-top: 2rem;
+  width: 50%;
+  padding: .2rem .8rem;
+  text-align: center;
+}
+
+.sessionWrapper__userData button{
+
+}
+.sessionWrapper__userData ul{
+  margin-top: .2rem;
+  border: 1px solid rgb(114, 243, 114);
+  border-radius: 2px;
+  list-style: none;
+}
+.sessionWrapper__userData h3{
+  color: #06C2CD
+}
+
+
+.sessionWrapper__userList div{
+  width: fit-content;
+  border: 1px solid rgb(114, 243, 114);
+  border-radius: 2px;
+}
+
+.sessionWrapper__userList p{
+  margin: 1rem .8rem;
+}
+
+.btnStandar{
+  border: 1px solid rgb(114, 243, 114);
+  border-radius: 4px;
+  text-transform: uppercase;
+  color: rgb(114, 243, 114);
+  background-color: #1D1717;
+  padding: .2rem .3rem;
+  margin: 0 .3rem;
+}
+.btnStandar:hover{
+  color: #06C2CD;
+  border-color: #06C2CD;
+}
+
 
 .imagenDelDia__wrapper{
   width: 40%;
@@ -73,10 +162,10 @@ body{
 
 .titulo__wrapper{
   background-color: rgb(29, 22, 22);
-  width: fit-content;
+  width: 22%;
   height: fit-content;
   margin: 0 auto;
-  padding: 1%;
+  padding: 1% 0;
   border-radius: 3px;
   text-align: center;
   position: relative;
@@ -86,11 +175,14 @@ body{
 }
 .titulo{
   user-select: none;
+  font-family: SpaceAge;
+  font-size: 1.6rem;
 }
 
 .mainNav{
-  font-size: 1.75rem;
-  width: 6.5rem;
+  font-size: 1rem;
+  font-family: SpaceAge;
+  width: 8rem;
   height: 100%;
   padding: 0 .8rem;
   position: absolute;
@@ -98,8 +190,8 @@ body{
   right: 9rem;
 }
 .mainNav__title{
+  font-size: 1.5rem;
   background-color: rgb(29, 22, 22);
-  font-size: 1.75rem;
   border-radius: 6px;
   position: relative;
   top: 40%;
@@ -110,33 +202,56 @@ body{
 }
 .mainNav ul{
   background-color: rgb(29, 22, 22);
-  width: 6.5rem;
+  width: 8rem;
   height: 0;
   position: absolute;
   top: 3.5rem;
   box-sizing: border-box;
   pointer-events: none;
   color : transparent;
-  border: 1px solid rgb(80, 76, 76);
+  border-bottom: 2px solid rgb(80, 76, 76);
+  border-left: 1px solid rgb(80, 76, 76);
+  border-right: 1px solid rgb(80, 76, 76);
   box-shadow: inset 0 0 15px rgb(21, 78, 59);
   transition: all .5s ;
+  overflow: hidden;
+
 }
 
 li{
   padding: 1rem .8rem;
   user-select: none;
 }
+.dataButtons{
+  display: flex;
+  margin-top: 5rem;
+  justify-content: space-evenly;
+  
+}
+.dataButtons__a{
+  border: 1px solid rgb(114, 243, 114);
+  padding: .8%;
+  width: fit-content;
+}
+
+a{
+  color: rgb(114, 243, 114);
+  text-transform: uppercase;
+}
+
+a:hover{
+  color: crimson;
+}
 
 .mainNav:hover ul{
-  height: 7.5rem;
+  height: 6.5rem;
   pointer-events: auto;
   border-radius: 2px;
-  color: rgb(114, 243, 114)
+  border-color: rgb(80, 76, 76);
+  
 }
 
-li:hover{
-  color:red
-}
+
 
 .content__wrapper{
   width: 100%;
@@ -151,11 +266,13 @@ li:hover{
   position: relative;
   top: 4.5rem;
 border: 1px solid #06C2CD;
+  border-radius: 2px;
   box-sizing: border-box;
-  padding: 1%;
   overflow-y: auto;
   transition: all 1s 2s;
 }
+
+
 
 .content::-webkit-scrollbar {
   width: 8px;     
@@ -172,7 +289,7 @@ border: 1px solid #06C2CD;
 
 
 .imagenNasa{
-  max-width: 100vw;
+  max-width: 60rem;
 }
 
 table, th, td{
@@ -201,6 +318,9 @@ table, th, td{
 
 .hud__left{
 /* border: 1px solid crimson; */
+
+  font-size: 1rem;
+  font-family: SpaceAge;
   width: 10%;
   height: 10rem;
   position: absolute;
@@ -219,12 +339,12 @@ table, th, td{
 .system::after{
   content: "";
   display: block;
-  width: .6rem;
-  height: .6rem;
+  width: .8rem;
+  height: .8rem;
   border-radius: 100%;
   background-color: crimson;
   position: absolute;
-  right: -1.2rem;
+  right: -1.4rem;
   top: .7rem;
   transition: all 0s 1s;
 
@@ -241,23 +361,9 @@ table, th, td{
   bottom: 0;
   transition: all 2s 2.5s ;
 
+
 }
 
 
 
-
-
-
-
-
-/* .wrapperChart{
-  width: 0;
-  background-color: red;
-  transition: width 3s 0 ease;
-  animation: chart 1s;
-  animation-fill-mode: forwards;
-}
-
-@keyframes chart {
-  100%{width: 80%;}
-} */
+/* vista objetos cercanos */

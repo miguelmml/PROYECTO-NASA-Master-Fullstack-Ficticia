@@ -67,16 +67,22 @@ function renderChartAndTable() {
     data: {
       labels: [], //IDs
       datasets: [{
+        hoverBackgroundColor: "white",
         margin: "0 auto",
         barPercentage: 0.3,
         borderWidth: 4,
-        label: 'Distance to earth(km): ',
+        label: 'Distance to earth (km): ',
         data: [], //valores de cercania
         backgroundColor: ['rgba(255, 99, 132, 1)','rgba(54, 162, 235, 1)','rgba(255, 206, 86, 1)','rgba(75, 192, 192, 1)','rgba(153, 102, 255, 1)','rgba(255, 159, 132, 1)','rgba(255, 99, 64, 1)','rgba(54, 162, 86, 1)','rgba(255, 206, 235, 1)','rgba(75, 192, 255, 1)','rgba(153, 102, 192, 1)','rgba(255, 99, 64, 1)','rgba(255, 159, 132, 1)','rgba(54, 206, 235, 1)','rgba(255, 162, 86, 1)','rgba(75, 102, 192, 1)','rgba(255, 192, 255, 1)','rgba(153, 159, 64, 1)','rgba(54, 99, 132, 1)','rgba(255, 162, 235, 1)','rgba(75, 206, 86, 1)','rgba(255, 192, 192, 1)','rgba(255, 102, 255, 1)','rgba(153, 159, 64, 1)'
         ],
       }]
     },
-    options: {scales: { yAxes: [ {ticks: {beginAtZero: true}}]}}
+    options: {legend: {
+      labels: {
+          fontColor: "white",
+          fontSize: 18
+      }
+      },scales: { yAxes: [ {ticks: {beginAtZero: true}}]}}
   };
   var myChart = new Chart(ctx, dataChart);
 
@@ -84,7 +90,7 @@ function renderChartAndTable() {
   currentValues.forEach(element => {
     document.getElementById("nearObjectTable").innerHTML += `
       <tr>
-      <td>${element.name}</td><td>${element.close_approach_data[0].miss_distance.kilometers}</td><td>${element.close_approach_data[0].relative_velocity.kilometers_per_second}</td><td>${element.estimated_diameter.kilometers.estimated_diameter_max}</td><td>${element.is_potentially_hazardous_asteroid}</td><td><a href="${element.nasa_jpl_url}" target="_blank">Read more...</a></td><td><button data-title="${element.name}" data-link="${element.nasa_jpl_url}">Save</button></td>
+      <td>${element.name}</td><td>${element.close_approach_data[0].miss_distance.kilometers}</td><td>${element.close_approach_data[0].relative_velocity.kilometers_per_second}</td><td>${element.estimated_diameter.kilometers.estimated_diameter_max}</td><td>${element.is_potentially_hazardous_asteroid}</td><td><a href="${element.nasa_jpl_url}" target="_blank">Read more...</a></td><td><button class="btnStandar" data-title="${element.name}" data-link="${element.nasa_jpl_url}">Save</button></td>
       </tr>
     `;
     dataChart.data.labels.push(element.name);
@@ -103,7 +109,7 @@ function transferenciaTecnologica(url,obj) {
     data.results.forEach(element => {
       document.getElementById('techTransferTable').innerHTML += `
       <tr>
-        <td>${element[4]}</td><td>${element[3]}</td><td>${element[5]}</td><td><a href="${element[10]}" target="_blank">IMG</a></td><td><a href="https://technology.nasa.gov/patent/${element[4]}" target="_blank">Read more...</a></td><td><button data-title="${element[4]}" data-link="https://technology.nasa.gov/patent/${element[4]}">Save</button></td>
+        <td>${element[4]}</td><td>${element[3]}</td><td>${element[5]}</td><td><a href="${element[10]}" target="_blank">IMG</a></td><td><a href="https://technology.nasa.gov/patent/${element[4]}" target="_blank">Read more...</a></td><td><button class="btnStandar" data-title="${element[4]}" data-link="https://technology.nasa.gov/patent/${element[4]}">Save</button></td>
       </tr>
       `;
     });

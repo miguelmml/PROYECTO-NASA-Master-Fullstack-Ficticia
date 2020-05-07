@@ -1,11 +1,11 @@
 //reglas css para las animaciones del inicio
 window.addEventListener('load', function() {
 
-  document.styleSheets[0].addRule("p.system::after","background-color: rgb(145, 255, 0)");
-  document.styleSheets[0].addRule("p.fuel::after","width: 3.5rem");
-  document.styleSheets[0].addRule("p.energy::after","width: 5rem");
+  document.styleSheets[0].addRule("p.system::after","background-color: rgb(145, 255, 0);box-shadow: 0 0 20px white");
+  document.styleSheets[0].addRule("p.fuel::after","width: 3rem");
+  document.styleSheets[0].addRule("p.energy::after","width: 5.8rem");
   document.styleSheets[0].addRule("p.shield::after","width: 1.5rem; background-color: crimson");
-  document.styleSheets[0].addRule(".content"," width: 80%; height: 30rem;");
+  document.styleSheets[0].addRule(".content"," width: 80%; height: 30rem;padding: 2%;");
   document.styleSheets[0].addRule("body","color: rgb(114, 243, 114) ");
 
 });
@@ -78,16 +78,22 @@ function renderChartAndTable() {
     data: {
       labels: [], //IDs
       datasets: [{
+        hoverBackgroundColor: "white",
         margin: "0 auto",
         barPercentage: 0.3,
         borderWidth: 4,
-        label: 'Distance to earth(km): ',
+        label: 'Distance to earth (km): ',
         data: [], //valores de cercania
         backgroundColor: ['rgba(255, 99, 132, 1)','rgba(54, 162, 235, 1)','rgba(255, 206, 86, 1)','rgba(75, 192, 192, 1)','rgba(153, 102, 255, 1)','rgba(255, 159, 132, 1)','rgba(255, 99, 64, 1)','rgba(54, 162, 86, 1)','rgba(255, 206, 235, 1)','rgba(75, 192, 255, 1)','rgba(153, 102, 192, 1)','rgba(255, 99, 64, 1)','rgba(255, 159, 132, 1)','rgba(54, 206, 235, 1)','rgba(255, 162, 86, 1)','rgba(75, 102, 192, 1)','rgba(255, 192, 255, 1)','rgba(153, 159, 64, 1)','rgba(54, 99, 132, 1)','rgba(255, 162, 235, 1)','rgba(75, 206, 86, 1)','rgba(255, 192, 192, 1)','rgba(255, 102, 255, 1)','rgba(153, 159, 64, 1)'
         ],
       }]
     },
-    options: {scales: { yAxes: [ {ticks: {beginAtZero: true}}]}}
+    options: {legend: {
+      labels: {
+          fontColor: "white",
+          fontSize: 18
+      }
+      },scales: { yAxes: [ {ticks: {beginAtZero: true}}]}}
   };
   var myChart = new Chart(ctx, dataChart);
 
@@ -95,7 +101,7 @@ function renderChartAndTable() {
   currentValues.forEach(element => {
     document.getElementById("nearObjectTable").innerHTML += `
       <tr>
-      <td>${element.name}</td><td>${element.close_approach_data[0].miss_distance.kilometers}</td><td>${element.close_approach_data[0].relative_velocity.kilometers_per_second}</td><td>${element.estimated_diameter.kilometers.estimated_diameter_max}</td><td>${element.is_potentially_hazardous_asteroid}</td><td><a href="${element.nasa_jpl_url}" target="_blank">Read more...</a></td><td><button data-title="${element.name}" data-link="${element.nasa_jpl_url}">Save</button></td>
+      <td>${element.name}</td><td>${element.close_approach_data[0].miss_distance.kilometers}</td><td>${element.close_approach_data[0].relative_velocity.kilometers_per_second}</td><td>${element.estimated_diameter.kilometers.estimated_diameter_max}</td><td>${element.is_potentially_hazardous_asteroid}</td><td><a href="${element.nasa_jpl_url}" target="_blank">Read more...</a></td><td><button class="btnStandar" data-title="${element.name}" data-link="${element.nasa_jpl_url}">Save</button></td>
       </tr>
     `;
     dataChart.data.labels.push(element.name);
@@ -114,7 +120,7 @@ function transferenciaTecnologica(url,obj) {
     data.results.forEach(element => {
       document.getElementById('techTransferTable').innerHTML += `
       <tr>
-        <td>${element[4]}</td><td>${element[3]}</td><td>${element[5]}</td><td><a href="${element[10]}" target="_blank">IMG</a></td><td><a href="https://technology.nasa.gov/patent/${element[4]}" target="_blank">Read more...</a></td><td><button data-title="${element[4]}" data-link="https://technology.nasa.gov/patent/${element[4]}">Save</button></td>
+        <td>${element[4]}</td><td>${element[3]}</td><td>${element[5]}</td><td><a href="${element[10]}" target="_blank">IMG</a></td><td><a href="https://technology.nasa.gov/patent/${element[4]}" target="_blank">Read more...</a></td><td><button class="btnStandar" data-title="${element[4]}" data-link="https://technology.nasa.gov/patent/${element[4]}">Save</button></td>
       </tr>
       `;
     });
@@ -126,6 +132,7 @@ function transferenciaTecnologica(url,obj) {
 
 var firebaseConfig = {
   // falta api key
+  apiKey: "AIzaSyAocTj9tvWhjdUy6EPCjAcWdLeHxCG8T2Q",
   authDomain: "proyecto-nasa-93d77.firebaseapp.com",
   databaseURL: "https://proyecto-nasa-93d77.firebaseio.com",
   projectId: "proyecto-nasa-93d77",
@@ -211,7 +218,7 @@ function accountListeners(){
      if(/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/.test(pass)){
         signUp(name,pass);
      } else {
-      document.getElementById('actionInfo').innerHTML = `Invalid pass, the password must contain: <br>- a capital letter <br>- a small letter-<br> a number<br>- 8-16 characters<br>- NO other symbols<br>`;
+      document.getElementById('actionInfo').innerHTML = `Invalid pass, the password must contain: <br>- a capital letter <br>- a small letter<br>- a number<br>- 8-16 characters<br>- NO other symbols<br>`;
      }
     } else {
       document.getElementById('actionInfo').innerHTML = `Invalid user name, use an e-mail account => example: name@demo.com`;
@@ -266,10 +273,11 @@ function accountListeners(){
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     console.log("Bienvenido! " + user.email);
-    document.getElementById("titulo").innerText = `${user.email}`;
+    let userName = user.email.split(/@/);
+    document.getElementById("titulo").innerText = `${userName[0]}`;
   } else {
     console.log("No hay nadie en el sistema");
-    document.getElementById("titulo").innerText = `No conectado`;
+    document.getElementById("titulo").innerText = `disconnected`;
   }
 });
 
@@ -282,7 +290,7 @@ function firebaseUserList() {
       document.getElementById("userList").innerHTML = "";
       snapshot.forEach((childSnapshot) => {
           let element = childSnapshot.val();
-          document.getElementById("userList").innerHTML += `${element.email}<br>`;
+          document.getElementById("userList").innerHTML += `<p>${element.email}<p>`;
       });
     }
   });
@@ -344,6 +352,7 @@ function listenerTechTransferTable() {
 
 window.addEventListener('load', () => {
   document.getElementById('cuenta').addEventListener('click', e => {
+    e.preventDefault();
     let id = e.target.id;
     window.history.pushState({id}, id, `/${id}`);
     renderView(id);
@@ -351,6 +360,7 @@ window.addEventListener('load', () => {
     firebaseUserList();
   });
   document.getElementById('datos').addEventListener('click', e => {
+    e.preventDefault();
     let id = e.target.id;
     window.history.pushState({id}, id, `/${id}`);
     renderView(id);
@@ -360,18 +370,21 @@ window.addEventListener('load', () => {
 
 function dataButtonsListeners() {
   document.getElementById('imagenDelDia').addEventListener('click', function(e){
+    e.preventDefault();
     let id = e.target.id;
     window.history.pushState({id}, id, `./datos/${id}`);
     renderView(id);
     obtenerImagen(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`);
   });
   document.getElementById('objetosCercanos').addEventListener('click', function(e){
+    e.preventDefault();
     let id = e.target.id;
     window.history.pushState({id}, id, `./datos/${id}`);
     renderView(id);
     objetosCercanos(`https://api.nasa.gov/neo/rest/v1/feed?&api_key=${apiKey}`);
 });
   document.getElementById('transferenciaTecnologica').addEventListener('click', function(e){
+    e.preventDefault();
     let id = e.target.id;
     window.history.pushState({id}, id, `./datos/${id}`);
     renderView(id);
@@ -476,51 +489,51 @@ function renderView(id){
   {
     idTemp: "cuenta",
     template: `
-      <h1>Vista cuenta</h1>
-      <div class="logIn__wrapper">
-        <h1>Autenticación con Firebase</h1>      
+      <h2>Account view</h2>
+      <div class="logInWrapper">
+        <h3>- Firebase authentication -</h3>      
         <input id="textBox" type="text" placeholder="Email">
         <input id="passBox" type="password" placeholder="Password">
-        <button id="btnSignUp">Sign Up</button>
-        <button id="btnLogIn">Log In</button>
-        <button id="btnLogOut">Log Out</button>
-        <button id="btnRemove">Delete</button>
-        <button id="btnGitHub">GitHub</button>
-      </div>
-      <div class="session__wrapper">
+        <button class="btnStandar" id="btnSignUp">Sign Up</button>
+        <button class="btnStandar" id="btnLogIn">Log In</button>
+        <button class="btnStandar" id="btnLogOut">Log Out</button>
+        <button class="btnStandar" id="btnRemove">Delete</button>
+        <button class="btnStandar" id="btnGitHub">GitHub</button>
         <div class="actionInfo__wrapper">
-          <p id="actionInfo"></p>
+          <p id="actionInfo">Info:</p>
         </div>
-        <div class="userList__wrapper">
-          <h2>Lista de Usuarios</h2>
+      </div>
+      <div class="sessionWrapper">
+        <div class="sessionWrapper__userList">
+          <h3>- User list -</h3>
           <div id="userList"></div>
         </div>
-      </div>
-      <div class="dbContent__wrapper">
-        <button id="btnMyData">My data</button>
-        <ul id="myData"></ul>
+        <div class="sessionWrapper__userData">
+          <button class="btnStandar" id="btnMyData">My data</button>
+          <ul id="myData"></ul>
+        </div>
       </div>
     `
   },
   {
     idTemp: "datos",
     template: `
-      <h1>Vista datos</h1>
+      <h2>Data view</h2>
       <div class="dataButtons">
-        <button id="imagenDelDia">Imagen del dia</button>
-        <button id="objetosCercanos">Objetos cercanos</button>
-        <button id="transferenciaTecnologica">Transferencia Tecnologica</button>
+        <a href="./datos/objetosCercanos" class="dataButtons__a" id="objetosCercanos">Near Objects</a>
+        <a href="./datos/imagenDelDia" class="dataButtons__a" id="imagenDelDia"> Astronomy Picture of the Day</a>
+        <a href="./datos/transferenciaTecnologica" class="dataButtons__a" id="transferenciaTecnologica">Tech Transfer</a>
       </div>
     `
   },
   {
     idTemp: "imagenDelDia",
     template: `
-      <h1>Imagen del dia</h1>
+      <h2>Picture of the day view</h2>
       <div class="imagenDelDia__wrapper">
         <input id="selectorFecha" type="date">
-        <button id="btnBuscar">Search</button>
-        <button id="saveImg">Save in Firebase</button>
+        <button class="btnStandar" id="btnBuscar">Search</button>
+        <button class="btnStandar" id="saveImg">Save in Firebase</button>
         <figure id="imagenDelDia"></figure>
       </div>
     `
@@ -528,8 +541,8 @@ function renderView(id){
   {
     idTemp: "objetosCercanos",
     template: `
-      <h1>Objetos Cercanos</h1>
-      <select  id="nearObjectSelect"></select>
+      <h2>Near Objects view</h2>
+      <select  class="nearObjectsSelect" id="nearObjectSelect"></select>
       <div class="wrapperChart" id="nearObjectChart">
         <canvas id="myChart"></canvas>
       </div>
@@ -545,7 +558,7 @@ function renderView(id){
   {
     idTemp: "transferenciaTecnologica",
     template: `
-      <h1>Transferencia Tecnologica</h1>
+      <h2>Tech transfer view</h2>
       <div class="wrapperTable">
       <table id="techTransferTable">
         <tr>
