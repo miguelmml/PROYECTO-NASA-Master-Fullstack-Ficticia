@@ -73,7 +73,7 @@ picture{
   list-style: none;
 }
 .sessionWrapper__userData h3{
-  color: #06C2CD
+  color: rgb(2, 180, 2);
 }
 
 
@@ -96,13 +96,27 @@ picture{
   padding: .2rem .3rem;
   margin: 0 .3rem;
 }
+
 .btnStandar:hover{
   color: #06C2CD;
   border-color: #06C2CD;
 }
 
+.btnDelete{
+  border: 1px solid rgb(114, 243, 114);
+  border-radius: 4px;
+  color: rgb(114, 243, 114);
+  background-color: #1D1717;
+  padding: .2rem .3rem;
+  margin: 0 .5rem;
+}
 
-.imagenDelDia__wrapper{
+.btnDelete:hover{
+  color: crimson;
+  border-color: crimson;
+}
+
+.pictureOfTheDay__wrapper{
   display: flex;
   justify-content: space-around;
 }
@@ -114,7 +128,7 @@ picture{
 .imgDayButtons * {
   margin: .5rem 0;
 }
-.imagenNasa{
+.nasaImage{
   max-width: 35rem;
 }
 

@@ -1,7 +1,7 @@
-
+//FIREBASE DATABASE & AUTHENTICATION
+//Configuracion
 var firebaseConfig = {
-  // falta api key
-  apiKey: "AIzaSyAocTj9tvWhjdUy6EPCjAcWdLeHxCG8T2Q",
+  apiKey: "AIzaSyAocTj9tvWhjdUy6EPCjAcWdLeHxCG8T2Q",// <= API KEY FIREBASE
   authDomain: "proyecto-nasa-93d77.firebaseapp.com",
   databaseURL: "https://proyecto-nasa-93d77.firebaseio.com",
   projectId: "proyecto-nasa-93d77",
@@ -9,19 +9,17 @@ var firebaseConfig = {
   messagingSenderId: "255032929039",
   appId: "1:255032929039:web:58da180b05f91282972c7a"
 };
-// Initialize Firebase
+//Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-//database
+//Referncia al database
 const ref = firebase.database().ref(`Users/`);
 
-
-// SIGN UP
+//Funcion SIGN UP
 function signUp(email,password){
   firebase.auth().createUserWithEmailAndPassword(email, password)
   .then(res => {
-    let num = email.indexOf("@");
-    let id = email.slice(0,num);
-    let userRef = firebase.database().ref(`Users/${id}`);
+    let id = email.split(/@/);
+    let userRef = firebase.database().ref(`Users/${id[0]}`);
     userRef.set({email:`${email}`});
     document.getElementById('actionInfo').innerHTML = `User ${email} sign up successfully`;
   })
@@ -30,7 +28,7 @@ function signUp(email,password){
   });
 }
 
-//LOG IN
+//Funcion LOG IN
 function logIn(email,password){
   firebase.auth().signInWithEmailAndPassword(email, password)
   .then(res => {       
@@ -45,42 +43,41 @@ function logIn(email,password){
 
 //LOG OUT
 function logOut(){
-  if(firebase.auth().currentUser){
+  if(firebase.auth().currentUser) {
     let user = firebase.auth().currentUser.email;
     firebase.auth().signOut()
     .then(function(){
-    document.getElementById('actionInfo').innerHTML = `User ${user}, disconnected`;
-    document.getElementById('myData').innerHTML = "";
+      document.getElementById('actionInfo').innerHTML = `User ${user}, disconnected`;
+      document.getElementById('myData').innerHTML = "";
     })
     .catch(function(error) {
-    document.getElementById('actionInfo').innerHTML = `ERROR: ${error.code}  ${error.message}`;
+      document.getElementById('actionInfo').innerHTML = `ERROR: ${error.code}  ${error.message}`;
     });
-  } else {
-    document.getElementById('actionInfo').innerHTML = `No users connected`;
+  }else {
+    document.getElementById('actionInfo').innerHTML = `user not connected`;
   }
 }
 
 //DELETE
-function borrarUser(){
+function deleteUser(){
   if(firebase.auth().currentUser){
-    confirm("¿Seguro que quieres borrar tu usuario?");
+    confirm("Are you sure to delete your user?");
     if(confirm){
       firebase.auth().currentUser.delete();
-      let user = firebase.auth().currentUser.email;
-      let id = user.slice(0,user.indexOf("@"));
-      let element = firebase.database().ref(`Users/${id}`);
+      let id = firebase.auth().currentUser.email.split(/@/);
+      let element = firebase.database().ref(`Users/${id[0]}`);
       element.remove();  
-      document.getElementById('actionInfo').innerHTML = `User ${user} was deleted.`;
+      document.getElementById('actionInfo').innerHTML = `User ${id[0]} was deleted.`;
     }
   } else {
-    document.getElementById('actionInfo').innerHTML = `No users connected`;
+    document.getElementById('actionInfo').innerHTML = `user not connected`;
   }
 }
 
-//Listener para los botones de cuentas
+//Listener para los botones de la seccion account
 function accountListeners(){
+  //Listener para Sign up
   document.getElementById("btnSignUp").addEventListener("click", function(){
-    console.log('click en registrar');
     let name = document.getElementById("textBox").value;
     let pass = document.getElementById("passBox").value;
     if(/^[A-Za-z]+[A-Za-z0-9-_]*@\w+\.[A-Za-z]+\.*[A-Za-z]*\.*[A-Za-z]*/.test(name)){
@@ -90,137 +87,35 @@ function accountListeners(){
       document.getElementById('actionInfo').innerHTML = `Invalid pass, the password must contain: <br>- a capital letter <br>- a small letter<br>- a number<br>- 8-16 characters<br>- NO other symbols<br>`;
      }
     } else {
-      document.getElementById('actionInfo').innerHTML = `Invalid user name, use an e-mail account => example: name@demo.com`;
+      document.getElementById('actionInfo').innerHTML = `Invalid user name, use an e-mail account => example: name@foo.com`;
     }
   });
 
+  //Listener para logIn
   document.getElementById("btnLogIn").addEventListener("click",function(){
-    console.log('click en logear');
     let name = document.getElementById("textBox").value;
     let pass = document.getElementById("passBox").value;
     logIn(name,pass);
     });
-  
+  //Listener para logOut
   document.getElementById("btnLogOut").addEventListener("click", logOut);
-
-  document.getElementById("btnRemove").addEventListener("click", borrarUser);
-
+  //Listener para delete
+  document.getElementById("btnRemove").addEventListener("click", deleteUser);
+  //Listener para logIn with github
   document.getElementById("btnGitHub").addEventListener("click", logInWithGithub);
-
-
-  document.getElementById("btnMyData").addEventListener('click', function() {
-    if(firebase.auth().currentUser) {
-      let data = firebase.auth().currentUser.providerData[0].email;
-      let num = data.indexOf("@");
-      let user = data.slice(0,num);
-      let userFirebaseRef = firebase.database().ref(`Users/${user}`);
-      var content = document.getElementById('myData');
-      userFirebaseRef.on("value", snapshot => {
-        if(snapshot.val().Images) {
-          content.innerHTML = `<h3>Images</h3>`;
-          for(let i in snapshot.val().Images){
-            content.innerHTML += `<li><a href="${snapshot.val().Images[i].url}" target="_blank">${snapshot.val().Images[i].title}</a></li>`;
-          }
-        }
-        if(snapshot.val().Near_Objects) {
-          content.innerHTML += `<h3>Near Objects</h3>`;
-          for(let i in snapshot.val().Near_Objects){
-            content.innerHTML += `<li><a href="${snapshot.val().Near_Objects[i].url}" target="_blank">${snapshot.val().Near_Objects[i].title}</a></li>`;
-          }
-        }
-        if(snapshot.val().Tech_Transfer) {
-          content.innerHTML += `<h3>Tech Transfer</h3>`;
-          for(let i in snapshot.val().Tech_Transfer){
-            content.innerHTML += `<li><a href="${snapshot.val().Tech_Transfer[i].url}" target="_blank">${snapshot.val().Tech_Transfer[i].title}</a></li>`;
-          }
-        }
-      });
-    } else {
-      throw new Error('No estas conectado');
-    }
-  });
+  //Listener para obtener los datos guardados por el usuario
+  document.getElementById("btnMyData").addEventListener('click', renderUserData);
 }
 
-
+//Listener para deteccion de usuario conectado
 firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
-    console.log("Bienvenido! " + user.email);
+  if(user) {
     let userName = user.email.split(/@/);
     document.getElementById("titulo").innerText = `${userName[0]}`;
   } else {
-    console.log("No hay nadie en el sistema");
     document.getElementById("titulo").innerText = `disconnected`;
   }
 });
-
-
-//pintar lista de usuarios 
-//Listener de cambios en la base de datos.
-function firebaseUserList() {
-  ref.on('value', (snapshot) => {
-    if(window.location.pathname == "/cuenta"){
-      document.getElementById("userList").innerHTML = "";
-      snapshot.forEach((childSnapshot) => {
-          let element = childSnapshot.val();
-          document.getElementById("userList").innerHTML += `<p>${element.email}<p>`;
-      });
-    }
-  });
-}
-
-//funcion para guardar las imagenes en firebase
- function saveImg() {
-  if(firebase.auth().currentUser) {
-    let imgSrc = document.getElementById('imagenNasa').src;
-    let imgTitle = document.getElementById('imagenNasa').dataset.title;
-    let data = firebase.auth().currentUser.providerData[0].email;
-    let num = data.indexOf("@");
-    let user = data.slice(0,num);
-    let userFirebaseRef = firebase.database().ref(`Users/${user}/Images/${imgTitle}`);
-    userFirebaseRef.set({ title: imgTitle, url: imgSrc});
-  } else {
-    throw new Error('No estas conectado');
-  }
-}
-
-
-//funcion para guardar datos de objetos cercanos en firebase
-function listenerNearObjectsTable() {
-  document.getElementById('nearObjectTable').addEventListener('click', function(e) {
-    if(firebase.auth().currentUser){
-      let nearObjectTitle =  e.target.dataset.title;
-      let nearObjectLink = e.target.dataset.link;
-      let data = firebase.auth().currentUser.providerData[0].email;
-      let num = data.indexOf("@");
-      let user = data.slice(0,num);
-      let userFirebaseRef = firebase.database().ref(`Users/${user}/Near_Objects/${nearObjectTitle}`);
-      userFirebaseRef.set({title: nearObjectTitle, url: nearObjectLink});
-    } else {
-      throw new Error('No estas conectado');
-    }
-  });
-}
-
-
-//funcion para guardar patentes tecnologicas en firebase
-function listenerTechTransferTable() {
-  document.getElementById('techTransferTable').addEventListener('click', function(e) {
-    if(firebase.auth().currentUser){
-      let techTitle =  e.target.dataset.title;
-      let techLink = e.target.dataset.link;
-      let data = firebase.auth().currentUser.providerData[0].email;
-      let num = data.indexOf("@");
-      let user = data.slice(0,num);
-      let userFirebaseRef = firebase.database().ref(`Users/${user}/Tech_Transfer/${techTitle}`);
-      userFirebaseRef.set({title: techTitle, url: techLink});
-    } else {
-      throw new Error('No estas conectado');
-    }
-  });
-}
-
-
-
 
 //Registro via GitHub.
 function logInWithGithub(){
@@ -235,5 +130,52 @@ function logInWithGithub(){
     // userRef.set({User:`${email}`, Img:`${result.user.providerData[0].photoURL}`});
   }).catch((error) => {
     document.getElementById('actionInfo').innerHTML = `ERROR: ${error.code}  ${error.message}`;
+  });
+}
+
+//Funcion para renderizar los datos de usuario guardados en firebase
+function renderUserData() {
+  if(firebase.auth().currentUser) {
+    let user = firebase.auth().currentUser.providerData[0].email.split(/@/);
+    let userFirebaseRef = firebase.database().ref(`Users/${user[0]}`);
+    var content = document.getElementById('myData');
+
+    userFirebaseRef.on("value", snapshot => {
+      if(snapshot.val().Images) {
+        content.innerHTML = `<h3>-Images-</h3>`;
+        for(let i in snapshot.val().Images){
+          content.innerHTML += `<li><a href="${snapshot.val().Images[i].url}" target="_blank">${snapshot.val().Images[i].title}</a><button class="btnDelete" data-section="Images" data-title="${snapshot.val().Images[i].title}">✖</button></li>`;
+        }
+      }
+      if(snapshot.val().Near_Objects) {
+        content.innerHTML += `<h3>-Near Objects-</h3>`;
+        for(let i in snapshot.val().Near_Objects){
+          content.innerHTML += `<li><a href="${snapshot.val().Near_Objects[i].url}" target="_blank">${snapshot.val().Near_Objects[i].title}</a><button class="btnDelete" data-section="Near_Objects" data-title="${snapshot.val().Near_Objects[i].title}">✖</button></li>`;
+        }
+      }
+      if(snapshot.val().Tech_Transfer) {
+        content.innerHTML += `<h3>-Tech Transfer-</h3>`;
+        for(let i in snapshot.val().Tech_Transfer){
+          content.innerHTML += `<li><a href="${snapshot.val().Tech_Transfer[i].url}" target="_blank">${snapshot.val().Tech_Transfer[i].title}</a><button class="btnDelete" data-section="Tech_Transfer" data-title="${snapshot.val().Tech_Transfer[i].title}">✖</button></li>`;
+        }
+      }
+    });
+    listenerUserDataButtons();
+  } else {
+    throw new Error('user not connected');
+  } 
+}
+
+function listenerUserDataButtons() {
+  document.getElementById('myData').addEventListener('click', function(e) {
+    if(firebase.auth().currentUser){
+      let title =  e.target.dataset.title;
+      let section = e.target.dataset.section;
+      let user = firebase.auth().currentUser.providerData[0].email.split(/@/);
+      let element = firebase.database().ref(`Users/${user[0]}/${section}/${title}`);
+      element.remove();
+    } else {
+      throw new Error('user not connected');
+    }
   });
 }

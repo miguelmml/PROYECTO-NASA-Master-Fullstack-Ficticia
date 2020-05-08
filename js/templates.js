@@ -4,7 +4,7 @@
     template: ""
   },
   {
-    idTemp: "cuenta",
+    idTemp: "account",
     template: `
       <h2>Account view</h2>
       <div class="logInWrapper">
@@ -33,32 +33,32 @@
     `
   },
   {
-    idTemp: "datos",
+    idTemp: "data",
     template: `
       <h2>Data view</h2>
       <div class="dataButtons">
-        <a href="./datos/objetosCercanos" class="dataButtons__a" id="objetosCercanos">Near Objects</a>
-        <a href="./datos/imagenDelDia" class="dataButtons__a" id="imagenDelDia"> Astronomy Picture of the Day</a>
-        <a href="./datos/transferenciaTecnologica" class="dataButtons__a" id="transferenciaTecnologica">Tech Transfer</a>
+        <a href="./data/nearObjects" class="dataButtons__a" id="nearObjects">Near Objects</a>
+        <a href="./data/pictureOfTheDay" class="dataButtons__a" id="pictureOfTheDay"> Astronomy Picture of the Day</a>
+        <a href="./data/techTransfer" class="dataButtons__a" id="techTransfer">Tech Transfer</a>
       </div>
     `
   },
   {
-    idTemp: "imagenDelDia",
+    idTemp: "pictureOfTheDay",
     template: `
       <h2>Picture of the day view</h2>
-      <div class="imagenDelDia__wrapper">
+      <div class="pictureOfTheDay__wrapper">
         <div class="imgDayButtons">
           <input class="dateSelect" id="dateSelect" type="date">
-          <button class="btnStandar" id="btnBuscar">Search</button>
+          <button class="btnStandar" id="btnSearch">Search</button>
           <button class="btnStandar" id="saveImg">Save in Firebase</button>
         </div>
-        <figure id="imagenDelDia"></figure>
+        <figure id="picture"></figure>
       </div>
     `
   },
   {
-    idTemp: "objetosCercanos",
+    idTemp: "nearObjects",
     template: `
       <h2>Near Objects view</h2>
       <select  class="nearObjectsSelect" id="nearObjectSelect"></select>
@@ -75,7 +75,7 @@
     `
   },
   {
-    idTemp: "transferenciaTecnologica",
+    idTemp: "techTransfer",
     template: `
       <h2>Tech transfer view</h2>
       <div class="wrapperTable">

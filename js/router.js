@@ -1,7 +1,7 @@
-
-
+//FRONT END ROUTER
+//Listeners para los enlaces del menu
 window.addEventListener('load', () => {
-  document.getElementById('cuenta').addEventListener('click', e => {
+  document.getElementById('account').addEventListener('click', e => {
     e.preventDefault();
     let id = e.target.id;
     window.history.pushState({id}, id, `/${id}`);
@@ -9,7 +9,7 @@ window.addEventListener('load', () => {
     accountListeners();
     firebaseUserList();
   });
-  document.getElementById('datos').addEventListener('click', e => {
+  document.getElementById('data').addEventListener('click', e => {
     e.preventDefault();
     let id = e.target.id;
     window.history.pushState({id}, id, `/${id}`);
@@ -18,67 +18,68 @@ window.addEventListener('load', () => {
   });
 });
 
+//Listener para los botones de la seccion de datos
 function dataButtonsListeners() {
-  document.getElementById('imagenDelDia').addEventListener('click', function(e){
+  document.getElementById('pictureOfTheDay').addEventListener('click', function(e){
     e.preventDefault();
     let id = e.target.id;
-    window.history.pushState({id}, id, `./datos/${id}`);
+    window.history.pushState({id}, id, `./data/${id}`);
     renderView(id);
-    obtenerImagen(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`);
+    getImage(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`);
   });
-  document.getElementById('objetosCercanos').addEventListener('click', function(e){
+  document.getElementById('nearObjects').addEventListener('click', function(e){
     e.preventDefault();
     let id = e.target.id;
-    window.history.pushState({id}, id, `./datos/${id}`);
+    window.history.pushState({id}, id, `./data/${id}`);
     renderView(id);
-    objetosCercanos(`https://api.nasa.gov/neo/rest/v1/feed?&api_key=${apiKey}`);
+    getNearObjects(`https://api.nasa.gov/neo/rest/v1/feed?&api_key=${apiKey}`);
 });
-  document.getElementById('transferenciaTecnologica').addEventListener('click', function(e){
+  document.getElementById('techTransfer').addEventListener('click', function(e){
     e.preventDefault();
     let id = e.target.id;
-    window.history.pushState({id}, id, `./datos/${id}`);
+    window.history.pushState({id}, id, `./data/${id}`);
     renderView(id);
-    transferenciaTecnologica(`https://api.nasa.gov/techtransfer/patent/?engine&api_key=${apiKey}`);
+    getTechTransfer(`https://api.nasa.gov/techtransfer/patent/?engine&api_key=${apiKey}`);
   });
 }
 
+//Listener para el cambio de estado en historial con los botones atras y adelante
 window.onpopstate = function(e){
   if(e.state){
     let id = e.state.id;
-    if(id == 'datos'){
+    if(id == 'data'){
       (async function (){
         await renderView(id);
         dataButtonsListeners();
       })();
-    } else if(id == 'imagenDelDia'){
+    } else if(id == 'pictureOfTheDay'){
       (async function (){
         await renderView(id);
-        obtenerImagen(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`);
+        getImage(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`);
       })();
-    } else if(id == 'objetosCercanos'){
+    } else if(id == 'nearObjects'){
       (async function (){
         await renderView(id);
-        objetosCercanos(`https://api.nasa.gov/neo/rest/v1/feed?&api_key=${apiKey}`);
+        getNearObjects(`https://api.nasa.gov/neo/rest/v1/feed?&api_key=${apiKey}`);
       })();
-    } else if(id == 'transferenciaTecnologica'){
+    } else if(id == 'techTransfer'){
       (async function (){
         await renderView(id);
-        transferenciaTecnologica(`https://api.nasa.gov/techtransfer/patent/?engine&api_key=${apiKey}`);
+        getTechTransfer(`https://api.nasa.gov/techtransfer/patent/?engine&api_key=${apiKey}`);
       })();
-    }else if(id == 'cuenta'){
+    }else if(id == 'account'){
       (async function (){
         await renderView(id);
         accountListeners();
         firebaseUserList();
       })();
-    } else {
-      renderView(id);
-    }
+    } 
   }else{
     renderView('/');
   }
 };
 
+//Funcion para renderizar la vista de la ruta tomando la plantilla adecuada
 function renderView(id){
   let template;
   templates.filter(function(obj){
@@ -87,4 +88,18 @@ function renderView(id){
     }
   });
   document.getElementById('content').innerHTML = template;
+}
+
+//Listener de cambios en la base de datos y pintar la lista de usuarios registrados
+//Es llamada en router.js
+function firebaseUserList() {
+  ref.on('value', (snapshot) => {
+    if(window.location.pathname == "/account"){
+      document.getElementById("userList").innerHTML = "";
+      snapshot.forEach((childSnapshot) => {
+          let element = childSnapshot.val();
+          document.getElementById("userList").innerHTML += `<p>${element.email}<p>`;
+      });
+    }
+  });
 }

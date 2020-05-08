@@ -1,7 +1,7 @@
-const gulp = require('gulp');
-const jshint = require('gulp-jshint');
-const concat = require('gulp-concat');
-const minify = require('gulp-minify');
+const gulp = require('gulp'),
+      jshint = require('gulp-jshint'),
+      concat = require('gulp-concat'),
+      minify = require('gulp-minify');
 
 function concatLinterMin() {
   return new Promise(function (res,rej){
@@ -22,7 +22,6 @@ gulp.task('concat-linter-min', concatLinterMin);
 gulp.task('default', gulp.series('concat-linter-min',function() { 
   return new Promise(function (res,rej){
     gulp.watch('js/*.js', concatLinterMin); 
-    console.log('Watcher iniciado');
     res();
   });
 }));
