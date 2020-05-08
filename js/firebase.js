@@ -105,6 +105,9 @@ function accountListeners(){
 
   document.getElementById("btnRemove").addEventListener("click", borrarUser);
 
+  document.getElementById("btnGitHub").addEventListener("click", logInWithGithub);
+
+
   document.getElementById("btnMyData").addEventListener('click', function() {
     if(firebase.auth().currentUser) {
       let data = firebase.auth().currentUser.providerData[0].email;
@@ -216,3 +219,21 @@ function listenerTechTransferTable() {
   });
 }
 
+
+
+
+//Registro via GitHub.
+function logInWithGithub(){
+  let provider = new firebase.auth.GithubAuthProvider();
+  firebase.auth().signInWithPopup(provider)
+  .then((result) => {
+    var token = result.credential.accessToken;
+    var user = result.user;
+    // let email = result.user.providerData[0].email;
+    // let id = email.slice(0,email.indexOf("@"));
+    // let userRef = firebase.database().ref(`Usuarios/${id}`);
+    // userRef.set({User:`${email}`, Img:`${result.user.providerData[0].photoURL}`});
+  }).catch((error) => {
+    document.getElementById('actionInfo').innerHTML = `ERROR: ${error.code}  ${error.message}`;
+  });
+}

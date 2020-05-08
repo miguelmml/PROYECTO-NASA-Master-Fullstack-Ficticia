@@ -4,7 +4,8 @@
   "description": "Segundo proyecto del Master-Fullstack en el que partire de las APIs de la NASA.",
   "main": "firebase.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm install && gulp"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
     "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",
     "gulp-jshint": "^2.1.0",
+    "gulp-minify": "^3.1.0",
     "jshint": "^2.11.0"
   }
 }
