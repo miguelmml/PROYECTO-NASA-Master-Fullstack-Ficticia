@@ -30,15 +30,40 @@ h3{
   margin: 1rem;
 }
 
+.nasaLink{
+  text-transform: initial;
+  color: #06C2CD;
+}
+.homeInfo__wrapper{
+  font-size: 1.5rem;
+  width: 80%;
+  margin: 2% auto 0;
+}
+.homeGreeting{
+  font-family: SpaceAge;
+  font-size: 7rem;
+  color: rgb(114, 243, 114);
+}
+.homeGreeting__wrapper{
+  position: relative;
+  top: 20%;
+  left: 15%;
+  width: 0;
+  overflow: hidden;
+  animation: greeting 3s 3.2s;
+}
+@keyframes greeting {
+  40%{width: 70%}
+  80%{width: 70%}
+}
+
 .logInWrapper input, .nearObjectsSelect, .dateSelect{
-  
   color: #fff;
   border: 1px solid rgb(105, 104, 104);
   border-radius: 2px;
   background-color: rgb(83, 76, 76);
   padding: .2rem;
   margin: 0 .5rem;
-
 }
 picture{
   margin: 0 auto;
@@ -47,9 +72,10 @@ picture{
 .actionInfo__wrapper{
   width: fit-content;
   margin: 1rem auto;
-  border: 1px solid rgb(114, 243, 114);
+  border: 1px solid #06C2CD;
+  color: #06C2CD;
   border-radius: 4px;
- padding: .2rem .8rem;
+  padding: .2rem .8rem;
 }
 
 .sessionWrapper{
@@ -270,7 +296,7 @@ a:hover{
 }
 
 .mainNav:hover ul{
-  height: 6.5rem;
+  height: 9.5rem;
   pointer-events: auto;
   border-radius: 2px;
   border-color: rgb(80, 76, 76);
@@ -291,7 +317,7 @@ a:hover{
   margin: 0 auto;
   position: relative;
   top: 4.5rem;
-border: 1px solid #06C2CD;
+  border: 1px solid #06C2CD;
   border-radius: 2px;
   box-sizing: border-box;
   overflow-y: auto;

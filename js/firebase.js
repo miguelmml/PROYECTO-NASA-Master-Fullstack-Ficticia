@@ -74,6 +74,22 @@ function deleteUser(){
   }
 }
 
+//LOGIN con GitHub.
+function logInWithGithub(){
+  let provider = new firebase.auth.GithubAuthProvider();
+  firebase.auth().signInWithPopup(provider)
+  .then((result) => {
+    let token = result.credential.accessToken;
+    let emailUser = result.user.email;
+    let user = emailUser.split(/@/);
+    let userRef = firebase.database().ref(`Users/${user[0]}`);
+    userRef.set({email:`${emailUser}`});
+    document.getElementById('actionInfo').innerHTML = `User ${emailUser} sign up successfully`;
+  }).catch((error) => {
+    document.getElementById('actionInfo').innerHTML = `ERROR: ${error.code}  ${error.message}`;
+  });
+}
+
 //Listener para los botones de la seccion account
 function accountListeners(){
   //Listener para Sign up
@@ -117,22 +133,6 @@ firebase.auth().onAuthStateChanged(function(user) {
   }
 });
 
-//Registro via GitHub.
-function logInWithGithub(){
-  let provider = new firebase.auth.GithubAuthProvider();
-  firebase.auth().signInWithPopup(provider)
-  .then((result) => {
-    var token = result.credential.accessToken;
-    var user = result.user;
-    // let email = result.user.providerData[0].email;
-    // let id = email.slice(0,email.indexOf("@"));
-    // let userRef = firebase.database().ref(`Usuarios/${id}`);
-    // userRef.set({User:`${email}`, Img:`${result.user.providerData[0].photoURL}`});
-  }).catch((error) => {
-    document.getElementById('actionInfo').innerHTML = `ERROR: ${error.code}  ${error.message}`;
-  });
-}
-
 //Funcion para renderizar los datos de usuario guardados en firebase
 function renderUserData() {
   if(firebase.auth().currentUser) {
@@ -165,7 +165,7 @@ function renderUserData() {
     throw new Error('user not connected');
   } 
 }
-
+//Listener para los botones de borrar datos guardados por el usuario en firebase
 function listenerUserDataButtons() {
   document.getElementById('myData').addEventListener('click', function(e) {
     if(firebase.auth().currentUser){

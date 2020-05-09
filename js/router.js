@@ -1,6 +1,12 @@
 //FRONT END ROUTER
 //Listeners para los enlaces del menu
 window.addEventListener('load', () => {
+  document.getElementById('home').addEventListener('click', e => {
+    e.preventDefault();
+    let id = e.target.id;
+    window.history.pushState({id}, id, `/${id}`);
+    renderView(id);
+  });
   document.getElementById('account').addEventListener('click', e => {
     e.preventDefault();
     let id = e.target.id;
@@ -16,6 +22,13 @@ window.addEventListener('load', () => {
     renderView(id);
     dataButtonsListeners();
   });
+  setTimeout(() => {
+    if(window.location.pathname == "/"){
+      let id = "home";
+      window.history.pushState({id}, id, `/${id}`);
+      renderView(id);
+    }
+  }, 6100); 
 });
 
 //Listener para los botones de la seccion de datos
@@ -47,12 +60,20 @@ function dataButtonsListeners() {
 window.onpopstate = function(e){
   if(e.state){
     let id = e.state.id;
-    if(id == 'data'){
+    if(id == 'home'){
+      renderView(id);
+    }else if(id == 'account'){
+      (async function (){
+        await renderView(id);
+        accountListeners();
+        firebaseUserList();
+      })();
+    }else if(id == 'data'){
       (async function (){
         await renderView(id);
         dataButtonsListeners();
       })();
-    } else if(id == 'pictureOfTheDay'){
+    }else if(id == 'pictureOfTheDay'){
       (async function (){
         await renderView(id);
         getImage(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`);
@@ -67,15 +88,7 @@ window.onpopstate = function(e){
         await renderView(id);
         getTechTransfer(`https://api.nasa.gov/techtransfer/patent/?engine&api_key=${apiKey}`);
       })();
-    }else if(id == 'account'){
-      (async function (){
-        await renderView(id);
-        accountListeners();
-        firebaseUserList();
-      })();
-    } 
-  }else{
-    renderView('/');
+    }
   }
 };
 

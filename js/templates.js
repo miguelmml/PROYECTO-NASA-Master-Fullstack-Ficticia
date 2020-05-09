@@ -1,7 +1,20 @@
  const templates = [
   {
-    idTemp: "/",
-    template: ""
+    idTemp: "home",
+    template: `
+    <div class="homeInfo__wrapper">
+      <h2>-NASA project for Master-fullstack Fictizia-</h2>
+      <p class="homeInfo">In this application you will be able to consult data available from some NASA Apis, such as the astronomical image of the day, information about near-Earth asteroids and information from NASA's technology transfer program, these last two sources of information provide links to articles. and more detailed data from different official NASA websites. You can also create an account to save the data that interests you or the images that you like the most.
+      <br>
+      <br>
+      NASA's apis portal provides many more sources of data for developers, in addition to those contained in this application, if you have been interested and want to know more about the data provided, you can consult their apis catalog on their 
+      <a href="https://api.nasa.gov/" target="_blank" class="nasaLink">official website.</a>
+      <br>
+      <br>
+      👽 Greetings 👽 
+      </p>
+    </div>
+    `
   },
   {
     idTemp: "account",
@@ -13,11 +26,11 @@
         <input id="passBox" type="password" placeholder="Password">
         <button class="btnStandar" id="btnSignUp">Sign Up</button>
         <button class="btnStandar" id="btnLogIn">Log In</button>
+        <button class="btnStandar" id="btnGitHub">Log In With GitHub</button>
         <button class="btnStandar" id="btnLogOut">Log Out</button>
         <button class="btnStandar" id="btnRemove">Delete</button>
-        <button class="btnStandar" id="btnGitHub">GitHub</button>
         <div class="actionInfo__wrapper">
-          <p id="actionInfo">Info:</p>
+          <p id="actionInfo">ℹ</p>
         </div>
       </div>
       <div class="sessionWrapper">
@@ -79,12 +92,12 @@
     template: `
       <h2>Tech transfer view</h2>
       <div class="wrapperTable">
-      <table id="techTransferTable">
-        <tr>
-          <th>ID</th><th>Description</th><th>Type</th><th>Image</th><th>Link</th><th>Firebase</th>
-        </tr>
-      </table>
-    </div>
+        <table id="techTransferTable">
+          <tr>
+            <th>ID</th><th>Description</th><th>Type</th><th>Image</th><th>Link</th><th>Firebase</th>
+          </tr>
+        </table>
+      </div>
     `
   }
 ];
