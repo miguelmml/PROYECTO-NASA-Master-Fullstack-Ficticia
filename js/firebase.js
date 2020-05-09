@@ -1,7 +1,7 @@
 //FIREBASE DATABASE & AUTHENTICATION
 //Configuracion
 var firebaseConfig = {
-  apiKey: "AIzaSyAocTj9tvWhjdUy6EPCjAcWdLeHxCG8T2Q",// <= API KEY FIREBASE
+  apiKey: "",// <= API KEY FIREBASE
   authDomain: "proyecto-nasa-93d77.firebaseapp.com",
   databaseURL: "https://proyecto-nasa-93d77.firebaseio.com",
   projectId: "proyecto-nasa-93d77",
