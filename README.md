@@ -1,11 +1,24 @@
 # PROYECTO-NASA-Master-Fullstack-Fictizia
 Segundo proyecto del Master-Fullstack en el que partire de las APIs de la NASA.
 
-La idea base sera una PWA que aporte datos interesantes sobre asteroides cercanos, imágenes de la Tierra, Marte y Luna, metereología, situación satelital... Presentación de los datos con gráficos, permanencia de datos en firebase y sesión de usuario con autenticación para poder personalizar los datos que más nos interesen y recibir notificaciones.
+_v1.0.0_
+
+Aplicación para consultar datos curiosos como la imagen astronómica del día, asteroides cercanos a la Tierra e información acerca del programa de transferencia tecnológica de la NASA y guardar lo que más te interese en Firebase, mediante Realtime Database y Authentication.
+
+- Front end
 
 - Vanilla JS
 
 - [NASA APIs](https://api.nasa.gov/)
+
+
+## Uso
+
+- Clonar el repositorio
+
+- Obtener una [api key](https://api.nasa.gov/) y añadirla al archivo js/main.js 
+
+- npm start
 
 **Requisitos para este proyecto:**
 - Manipulación dinánima del DOM
@@ -25,10 +38,6 @@ La idea base sera una PWA que aporte datos interesantes sobre asteroides cercano
 - Automatización de tareas
 - PWA y Offline First
 
-
 **Extras:**
 - Testing
 - JSDocs
-
-**Fecha de entrega:**
-- Aprox. Clase 67* (4/5/2020)
