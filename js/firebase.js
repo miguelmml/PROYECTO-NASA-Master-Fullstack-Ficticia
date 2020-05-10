@@ -1,7 +1,7 @@
 //FIREBASE DATABASE & AUTHENTICATION
 //Configuracion
 var firebaseConfig = {
-  apiKey: "",// <= API KEY FIREBASE
+  apiKey: "AIzaSyAocTj9tvWhjdUy6EPCjAcWdLeHxCG8T2Q",
   authDomain: "proyecto-nasa-93d77.firebaseapp.com",
   databaseURL: "https://proyecto-nasa-93d77.firebaseio.com",
   projectId: "proyecto-nasa-93d77",
@@ -128,8 +128,10 @@ firebase.auth().onAuthStateChanged(function(user) {
   if(user) {
     let userName = user.email.split(/@/);
     document.getElementById("titulo").innerText = `${userName[0]}`;
+    document.styleSheets[0].addRule(".title__wrapper::after","background-color: rgb(145, 255, 0);box-shadow: 0 0 20px white");
   } else {
     document.getElementById("titulo").innerText = `disconnected`;
+    document.styleSheets[0].addRule(".title__wrapper::after","background-color: crimson; box-shadow: none");
   }
 });
 
@@ -179,3 +181,5 @@ function listenerUserDataButtons() {
     }
   });
 }
+
+

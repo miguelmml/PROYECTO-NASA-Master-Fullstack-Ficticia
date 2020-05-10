@@ -1,4 +1,4 @@
-const apiKey = '';// <= API KEY NASA, get it on https://api.nasa.gov/
+const apiKey = 'ucAcc1waPwEqw6nbOEW0X8Gvna6pfDsMuokFHBho';// <= API KEY NASA, get it on https://api.nasa.gov/
 
 //DIFERENTES FETCH DE DATOS
 //fetch para imagen del dia y listener para cambiar de dia con el select
