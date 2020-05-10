@@ -16,7 +16,7 @@ html{
 body{
   background-color: rgb(29, 22, 22);
   color: rgb(46, 102, 46);
-  transition: color 0s 1.5s;
+  transition: color .3s 1.5s;
   overflow: hidden;
 }
 h2{
@@ -46,23 +46,24 @@ a:hover{
   font-size: 1.5rem;
   width: 80%;
   margin: 2% auto 0;
+  position: relative;
 }
 .homeGreeting{
   font-family: SpaceAge;
-  font-size: 7rem;
+  font-size: 4rem;
   color: rgb(114, 243, 114);
+  width: fit-content;
 }
 .homeGreeting__wrapper{
-  position: relative;
-  top: 20%;
-  left: 15%;
+  margin-left: 10%;
+  margin-top: 3%;
   width: 0;
   overflow: hidden;
   animation: greeting 3s 3.2s;
 }
 @keyframes greeting {
-  40%{width: 70%}
-  80%{width: 70%}
+  40%{width: 100%}
+  80%{width: 100%}
 }
 
 /* reglas para los input type select, date y text*/
@@ -164,17 +165,17 @@ picture{
 
 /* shell the app => header y footer */
 .mainHeader{
-  background-color: rgb(9, 41, 65);
+  /* background-color: rgb(9, 41, 65); */
+  background-color: #00487E;
   height: 3.5rem;
   width: 100%;
-  min-width: 1100px;
   position: fixed;
   top: 0;
   padding: 1rem;
   box-sizing: border-box;
   font-size: 2rem;
   display: flex;
-  box-shadow: inset 0 10px 10px rgb(2, 20, 32);
+  box-shadow: inset 0 -3.5rem 80px black;
   z-index: 1;
 }
 .mainHeader::after{
@@ -182,7 +183,7 @@ picture{
   content: "";
   width: 25%;
   height: 0;
-  border-top: 2.8rem solid rgb(9, 41, 65);
+  border-top: 2.8rem solid #00080F;
   border-right: 40px solid transparent;
   border-left: 40px solid transparent;
   position: absolute;
@@ -195,24 +196,23 @@ picture{
   background-color: #00487E;
   height: 3.5rem;
   width: 100%;
-  min-width: 1100px;
   position: fixed;
   bottom: 0;
   padding: 1rem;
   box-sizing: border-box;
-  box-shadow: inset 0 2rem 80px black;
+  box-shadow: inset 0 5rem 80px black;
 }
 .mainFooter::after{
   display: block;
   content: "";
   width: 25%;
   height: 0;
-  border-top: 2.8rem solid rgb(29, 22, 22);
+  border-top: 2.8rem solid #1D1616;
   border-right: 40px solid transparent;
   border-left: 40px solid transparent;
   position: absolute;
   left: 50%;
-  bottom: 0.7rem;
+  bottom: .8rem;
   transform: translate(-50%);
 }
 .title__wrapper{
@@ -231,7 +231,7 @@ picture{
 .title{
   user-select: none;
   font-family: SpaceAge;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
 }
 .mainNav{
   font-size: 1rem;
@@ -241,10 +241,10 @@ picture{
   padding: 0 .8rem;
   position: absolute;
   top: 0;
-  right: 9rem;
+  right: 11%;
 }
 .mainNav__title{
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   background-color: rgb(29, 22, 22);
   border-radius: 6px;
   position: relative;
@@ -279,6 +279,14 @@ picture{
 .mainNav__a{
   color: rgb(114, 243, 114)
 }
+.logoWrapper{
+  width: 7.5rem;
+  position: absolute;
+  left: 5%
+} 
+.logoWrapper img{
+  max-width: 100%;
+}
 
 /* vista data */
 .dataButtons{
@@ -309,6 +317,7 @@ picture{
   border-radius: 2px;
   box-sizing: border-box;
   overflow-y: auto;
+  overflow-x: hidden;
   transition: all 1s 2s;
 }
 .content::-webkit-scrollbar { /*estilos scroll bar*/
@@ -345,7 +354,7 @@ canvas{
 
 /* HUD , animaciones primera carga*/
 .hud__right{
-  width: 10%;
+  width: 12.5%;
   position: absolute;
   top: 100%;
   right: 0;
@@ -359,7 +368,7 @@ canvas{
 .hud__left{
   font-size: 1rem;
   font-family: SpaceAge;
-  width: 10%;
+  width: 12.5%;
   height: 10rem;
   position: absolute;
   top: 4.5rem;
@@ -394,30 +403,28 @@ canvas{
   position: absolute;
   right: 0;
   bottom: 0;
-  transition: all 2s 2.5s ;
+  transition: all 3s 3s ;
 }
-
+.engines__wrapper{
+  text-align: center;
+  width: 8rem;
+  position: absolute;
+  right: 8%;
+}
+.lights__wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
 .lights{
+  display: block;
   width: .8rem;
   height: .8rem;
   border: 1px solid rgb(66, 62, 62);
   border-radius: 100%;
   background-color: crimson;
-  position: absolute;
-  top:20%;
-  right: 15%;
-  transition: all 0s 2s;
-}
-.lights-2{
-  right: 18%;
-}
-.lights-3{
-  right: 12%;
+  transition: all .3s 2.5s;
 }
 .lights-title{
-  position: absolute;
-  top: 52%;
-  right: 12.3%;
   font-family: SpaceAge;
-  /* color: rgb(248, 103, 50) */
 }
