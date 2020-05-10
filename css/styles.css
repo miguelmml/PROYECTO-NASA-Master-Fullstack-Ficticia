@@ -163,9 +163,8 @@ picture{
   margin: 0 auto;
 }
 
-/* shell the app => header y footer */
+/* header y footer */
 .mainHeader{
-  /* background-color: rgb(9, 41, 65); */
   background-color: #00487E;
   height: 3.5rem;
   width: 100%;

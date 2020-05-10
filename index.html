@@ -4,13 +4,11 @@
 <meta charset="utf-8"> 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Proyecto NASA</title>
-<link rel="manifest" href="manifest.json">
 <link href="dist/styles-min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 </head>
     
 <body>
-
   <header class="mainHeader">
 
     <div class="logoWrapper">
@@ -29,6 +27,7 @@
         <li><a class="mainNav__a" href="./data" id="data">data</a></li>
       </ul>
     </nav>
+
   </header>
   
   <div class="hud__left">
@@ -37,6 +36,7 @@
     <p class="energy">energy</p>
     <p class="shield">shield</p>
   </div>
+
   <div class="hud__right">
     <img src="css/ui-img/vectorpaint.png" alt="">
   </div>
@@ -59,15 +59,12 @@
       <p class="lights-title">engines</p>
     </div>
   </footer>
-
-
-  
   
   <!-- FIREBASE -->
   <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-database.js"></script>
 
-  <script type="module" src="dist/all-min.js"></script>
+  <script src="dist/all-min.js"></script>
 </body>
 </html>

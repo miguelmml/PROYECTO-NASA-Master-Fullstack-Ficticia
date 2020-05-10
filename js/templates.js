@@ -1,4 +1,7 @@
- const templates = [
+/**
+ * @file archivo que contiene el objeto que contiene las diferentes plantillas para las vistas
+ */
+const templates = [
   {
     idTemp: "home",
     template: `
@@ -26,7 +29,7 @@
         <input id="passBox" type="password" placeholder="Password">
         <button class="btnStandar" id="btnSignUp">Sign Up</button>
         <button class="btnStandar" id="btnLogIn">Log In</button>
-        <button class="btnStandar" id="btnGitHub">Log In With GitHub</button>
+        <button class="btnStandar" id="btnGitHub">GitHub Log In</button>
         <button class="btnStandar" id="btnLogOut">Log Out</button>
         <button class="btnStandar" id="btnRemove">Delete</button>
         <div class="actionInfo__wrapper">

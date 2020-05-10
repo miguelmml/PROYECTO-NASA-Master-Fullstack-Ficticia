@@ -24,6 +24,7 @@
     "gulp-jshint": "^2.1.0",
     "gulp-minify": "^3.1.0",
     "gulp-rename": "^2.0.0",
+    "jsdocs": "^1.0.0",
     "jshint": "^2.11.0"
   }
 }
