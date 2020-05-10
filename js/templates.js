@@ -3,11 +3,11 @@
     idTemp: "home",
     template: `
     <div class="homeInfo__wrapper">
-      <h2>-NASA project for Master-fullstack Fictizia-</h2>
-      <p class="homeInfo">In this application you will be able to consult data available from some NASA Apis, such as the astronomical image of the day, information about near-Earth asteroids and information from NASA's technology transfer program, these last two sources of information provide links to articles. and more detailed data from different official NASA websites. You can also create an account to save the data that interests you or the images that you like the most.
+      <h2>-A NASA project for Master-fullstack Fictizia-</h2>
+      <p class="homeInfo">In this app you will be able to consult data available from some NASA APIs, such as the astronomical image of the day, information about near-Earth asteroids and information from NASA's technology transfer program, these last two sources of information provide links to articles and more detailed data from different official NASA websites. You can also create an account to save information you are interested in or the images that you like the most.
       <br>
       <br>
-      NASA's apis portal provides many more sources of data for developers, in addition to those contained in this application, if you have been interested and want to know more about the data provided, you can consult their apis catalog on their 
+      NASA's APIs portal provides many more sources of data for developers, in addition to those contained in this application, if you are interested and want to know more about data provided, you can consult their APIs catalog on their 
       <a href="https://api.nasa.gov/" target="_blank" class="nasaLink">official website.</a>
       <br>
       <br>

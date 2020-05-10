@@ -1,7 +1,9 @@
 const gulp = require('gulp'),
       jshint = require('gulp-jshint'),
       concat = require('gulp-concat'),
-      minify = require('gulp-minify');
+      minify = require('gulp-minify'),
+      cleanCSS = require('gulp-clean-css'),
+      rename = require("gulp-rename");
 
 function concatLinterMin() {
   return new Promise(function (res,rej){
@@ -17,11 +19,25 @@ function concatLinterMin() {
   })
 }
 
-gulp.task('concat-linter-min', concatLinterMin);
+function minifyCss() {
+  return new Promise(function (res,rej){
+    gulp.src('css/styles.css')
+    .pipe(cleanCSS())
+    .pipe(rename({suffix: '-min'}))
+    .pipe(gulp.dest('dist'));
+    res();
+  })
+}
 
-gulp.task('default', gulp.series('concat-linter-min',function() { 
+function addWatchers() { 
   return new Promise(function (res,rej){
     gulp.watch('js/*.js', concatLinterMin); 
+    gulp.watch('css/styles.css', minifyCss);
     res();
-  });
-}));
+  })
+}
+
+gulp.task('concat-linter-min', concatLinterMin);
+gulp.task('minify-css', minifyCss);
+
+gulp.task('default', gulp.series(gulp.parallel('concat-linter-min', 'minify-css'), addWatchers));
